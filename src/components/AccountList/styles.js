@@ -16,9 +16,12 @@ const AccountItem = styled.div`
   border: 0.15em solid #e6007a;
   cursor: pointer;
 
-  &.active {
+  ${({ active }) =>
+    active &&
+    `
     background: #e6007a;
-  }
+  `}
+
   &:hover {
     background: #e6007a;
 
@@ -28,4 +31,27 @@ const AccountItem = styled.div`
   }
 `;
 
-export { AccountList, AccountItem };
+const AccountAlias = styled.span`
+  font-size: 1.5em;
+  padding: 0 0.3em;
+`;
+
+const AccountIcon = styled.span`
+  display: inline-block;
+  position: relative;
+  top: 6px;
+  width: 28px;
+  height: 28px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const AccountAddress = styled.span`
+  font-size: .8em;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export { AccountList, AccountItem, AccountAlias, AccountIcon, AccountAddress };

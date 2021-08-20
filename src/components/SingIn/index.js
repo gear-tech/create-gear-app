@@ -1,8 +1,7 @@
 import { React } from "react";
-import Identicon from '@polkadot/react-identicon';
+import Identicon from "@polkadot/react-identicon";
 
 const SingIn = ({ toggleModal, currentAccount }) => {
-
   let singIn;
 
   if (currentAccount !== null) {
@@ -15,7 +14,11 @@ const SingIn = ({ toggleModal, currentAccount }) => {
     <div className="singin-box">
       <div className="singin" onClick={toggleModal}>
         {currentAccount && (
-          <Identicon value={currentAccount.address} size={28} theme={"polkadot"}/>
+          <Identicon
+            value={currentAccount.address}
+            size={28}
+            theme={"polkadot"}
+          />
         )}
         <span className="singin-name">{singIn}</span>
       </div>

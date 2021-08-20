@@ -10,14 +10,20 @@ function App({ api }) {
   const [accounts, setAccouts] = useState(null);
   const [account, setAccout] = useState(null);
 
-  const toggleModal = (e) => {
+  const toggleModal = (event) => {
+    event.stopPropagation();
     setIsOpen(!isOpen);
-    e.stopPropagation();
   };
 
   const chooseAccount = (event, index) => {
-    console.log(accounts)
-    event.currentTarget.className += " active";
+    event.stopPropagation();
+    accounts.map((acc, i) => {
+      acc.isActive = false;
+      if (i === index) {
+        acc.isActive = true;
+        localStorage.setItem('savedAccount', acc.address)
+      }
+    });
     setAccout(accounts[index]);
   };
 
@@ -34,7 +40,13 @@ function App({ api }) {
       }
 
       const allAccounts = await web3Accounts();
-      console.log(allAccounts.map(acc => acc.isActive = "false"))
+
+      allAccounts.forEach(acc => {
+        if(acc.address === localStorage.getItem('savedAccount')){
+          acc.isActive = true;
+          setAccout(acc)
+        }
+      })
       setAccouts(allAccounts);
     };
     getAllAccounts();
@@ -46,7 +58,7 @@ function App({ api }) {
         <SingIn toggleModal={toggleModal} currentAccount={account} />
       </header>
       <main>
-        <h1>My cool dApp</h1>
+        <h1>Cubic Game</h1>
       </main>
       {isOpen && (
         <Modal
