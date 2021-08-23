@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   color:#fefefe
 }
 
@@ -55,3 +54,36 @@
 }
 
 
+
+.highlight {
+  border-radius: 5px;
+  border-color: #d1ccbd;
+  border: 0.1em solid #aaa;
+  padding: 0.5em 1em;
+}
+.highlight {
+  align-items: center;
+  display: flex;
+  margin-bottom: 0.5em;
+}
+
+.highlight label {
+  margin-right: 0.5em;
+}
+
+label {
+  color: #888888;
+}
+
+button, input {
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+}
+
+input {
+  border: none;
+  flex: 1;
+}

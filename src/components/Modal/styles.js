@@ -60,6 +60,7 @@ const ModalCloseX = styled.span`
 const Title = styled.h2`
     font-size: 1.6em;
     font-weight: 400; 
+    text-align: center
 `;
 
 

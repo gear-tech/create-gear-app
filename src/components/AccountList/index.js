@@ -10,6 +10,7 @@ import {
 import Identicon from "@polkadot/react-identicon";
 
 const AccountsList = ({ list, toggleAccount }) => {
+    
   const account = list.map((account, index) => {
     return (
       <AccountItem

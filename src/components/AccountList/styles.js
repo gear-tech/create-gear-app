@@ -4,6 +4,7 @@ const AccountList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align:center;
   padding: 1em;
 `;
 
