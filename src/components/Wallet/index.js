@@ -1,8 +1,8 @@
-import { React, useEffect, useState } from "react";
-import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";
-import SingIn from "./SingIn";
-import Modal from "./Modal";
-import AccountsList from "./AccountList";
+import { React, useEffect, useState } from 'react';
+import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
+import SingIn from './SingIn';
+import Modal from './Modal';
+import AccountsList from './AccountList';
 
 const Wallet = ({ handleAccount, api }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ const Wallet = ({ handleAccount, api }) => {
       acc.isActive = false;
       if (i === index) {
         acc.isActive = true;
-        localStorage.setItem("savedAccount", acc.address);
+        localStorage.setItem('savedAccount', acc.address);
         getBalance(acc.address);
       }
     });
@@ -41,7 +41,7 @@ const Wallet = ({ handleAccount, api }) => {
   // If LocalStorage already contains the last chosen account then set it into the State
   useEffect(() => {
     const getAllAccounts = async () => {
-      const extensions = await web3Enable("my gear dapp");
+      const extensions = await web3Enable('my gear dapp');
 
       if (extensions.length === 0) {
         return;
@@ -50,7 +50,7 @@ const Wallet = ({ handleAccount, api }) => {
       const allAccounts = await web3Accounts();
 
       allAccounts.forEach((acc) => {
-        if (acc.address === localStorage.getItem("savedAccount")) {
+        if (acc.address === localStorage.getItem('savedAccount')) {
           acc.isActive = true;
           setAccout(acc);
           getBalance(acc.address);
@@ -60,8 +60,6 @@ const Wallet = ({ handleAccount, api }) => {
       setAccouts(allAccounts);
     };
     getAllAccounts();
-
-    // eslint-disable-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -74,9 +72,13 @@ const Wallet = ({ handleAccount, api }) => {
       {isOpen && (
         <Modal
           title="Sing In"
-          content={accounts? <AccountsList list={accounts} toggleAccount={chooseAccount} />
-          :
-          "Couldn't find the accounts"}
+          content={
+            accounts ? (
+              <AccountsList list={accounts} toggleAccount={chooseAccount} />
+            ) : (
+              "Couldn't find the accounts"
+            )
+          }
           handleClose={toggleModal}
         />
       )}

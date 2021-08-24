@@ -1,11 +1,14 @@
-import "./App.css";
-import { React, useState, useCallback } from "react";
-import { web3FromSource } from "@polkadot/extension-dapp";
-import Wallet from "./components/Wallet";
+import './App.css';
+import { React, useState, useCallback } from 'react';
+import { web3FromSource } from '@polkadot/extension-dapp';
+import Wallet from './components/Wallet';
+
+
 
 function App({ api }) {
+
   const [account, setAccout] = useState(null);
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState('');
   const [amount, setAmount] = useState(0);
 
   // Setting account state
@@ -21,22 +24,21 @@ function App({ api }) {
 
     const transferExtrinsic = api.tx.balances.transfer(
       destination,
-      amount * FROM_MILI
+      amount * FROM_MILI,
     );
 
     const injector = await web3FromSource(account.meta.source);
 
     transferExtrinsic
-      .signAndSend(account.address,{ signer: injector.signer },({ status }) => {
-          if (status.isInBlock) {
-            console.log(`Completed at block hash #${status.asInBlock.toString()}`);
-          } else {
-            console.log(`Current status: ${status.type}`);
-          }
+      .signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
+        if (status.isInBlock) {
+          console.log(`Completed at block hash #${status.asInBlock.toString()}`);
+        } else {
+          console.log(`Current status: ${status.type}`);
         }
-      )
+      })
       .catch((error) => {
-        console.log(":( transaction failed", error);
+        console.log(':( transaction failed', error);
       });
   };
 
@@ -65,8 +67,8 @@ function App({ api }) {
             <input
               type="number"
               id="amount"
-              step="0.01" 
-              min="0" 
+              step="0.01"
+              min="0"
               max="100"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}

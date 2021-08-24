@@ -1,6 +1,8 @@
-import { React } from "react";
-import Identicon from "@polkadot/react-identicon";
-import { WalletWrapper, Wallet, AccountName, BalanceInfo } from "./styles";
+import { React } from 'react';
+import Identicon from '@polkadot/react-identicon';
+import {
+  WalletWrapper, Wallet, AccountName, BalanceInfo,
+} from './styles';
 
 const SingIn = ({ toggleModal, currentAccount, balance }) => {
   let singIn;
@@ -8,7 +10,7 @@ const SingIn = ({ toggleModal, currentAccount, balance }) => {
   if (currentAccount !== null) {
     singIn = currentAccount.meta.name;
   } else {
-    singIn = "Sing In";
+    singIn = 'Sing In';
   }
 
   return (
@@ -19,7 +21,7 @@ const SingIn = ({ toggleModal, currentAccount, balance }) => {
           <Identicon
             value={currentAccount.address}
             size={28}
-            theme={"polkadot"}
+            theme="polkadot"
           />
         )}
         <AccountName>{singIn}</AccountName>
