@@ -60,7 +60,7 @@ const Wallet = ({ handleAccount, api }) => {
       setAccouts(allAccounts);
     };
     getAllAccounts();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
