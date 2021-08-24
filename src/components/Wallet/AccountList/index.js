@@ -1,5 +1,5 @@
 import { React } from "react";
-import toShortAddress from "../../utils";
+import toShortAddress from "../../../utils";
 import {
   AccountList,
   AccountItem,
