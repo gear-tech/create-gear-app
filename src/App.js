@@ -8,11 +8,12 @@ function App({ api }) {
   const [destination, setDestination] = useState("");
   const [amount, setAmount] = useState(0);
 
+  // Setting account state
   const handleAccount = useCallback((acc) => {
-    console.log(acc);
     setAccout(acc);
   }, []);
 
+  // Form submit example
   const handleSubmit = async (e) => {
     e.preventDefault();
 

@@ -16,10 +16,10 @@ const ModalBox = styled.div`
     width: 20em;
   }
   margin: 0 auto;
+  text-align:center;
   height: auto;
   max-height: 70vh;
   margin-top: calc(100vh - 85vh - 20px);
-  background: #fff;
   padding: 20px;
   border: 1px solid rgb(51, 51, 51);
   border-radius: 24px;

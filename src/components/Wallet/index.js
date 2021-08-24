@@ -60,6 +60,8 @@ const Wallet = ({ handleAccount, api }) => {
       setAccouts(allAccounts);
     };
     getAllAccounts();
+
+    // eslint-disable-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -72,9 +74,9 @@ const Wallet = ({ handleAccount, api }) => {
       {isOpen && (
         <Modal
           title="Sing In"
-          content={
-            <AccountsList list={accounts} toggleAccount={chooseAccount} />
-          }
+          content={accounts? <AccountsList list={accounts} toggleAccount={chooseAccount} />
+          :
+          "Couldn't find the accounts"}
           handleClose={toggleModal}
         />
       )}
