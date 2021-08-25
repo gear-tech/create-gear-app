@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ModalWarapper = styled.div`
   position: fixed;
@@ -16,7 +16,7 @@ const ModalBox = styled.div`
     width: 20em;
   }
   margin: 0 auto;
-  text-align:center;
+  text-align: center;
   height: auto;
   max-height: 70vh;
   margin-top: calc(100vh - 85vh - 20px);
@@ -58,11 +58,9 @@ const ModalCloseX = styled.span`
 `;
 
 const Title = styled.h2`
-    font-size: 1.6em;
-    font-weight: 400; 
-    text-align: center
+  font-size: 1.6em;
+  font-weight: 400;
+  text-align: center;
 `;
 
-export {
-  ModalWarapper, ModalBox, ModalCloseX, ModalClose, Title,
-};
+export { ModalWarapper, ModalBox, ModalCloseX, ModalClose, Title };

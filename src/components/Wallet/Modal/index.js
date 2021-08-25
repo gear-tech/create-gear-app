@@ -1,8 +1,6 @@
-import React from 'react';
-import {
-  ModalWarapper, ModalBox, ModalCloseX, ModalClose, Title,
-} from './styles';
-import { ReactComponent as CloseSVG } from '../../../close.svg';
+import React from "react";
+import { ModalWarapper, ModalBox, ModalCloseX, ModalClose, Title } from "./styles";
+import { ReactComponent as CloseSVG } from "../../../close.svg";
 
 const Modal = ({ content, title, handleClose }) => (
   <ModalWarapper>

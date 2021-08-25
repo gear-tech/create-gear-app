@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const AccountList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align:center;
+  text-align: center;
   padding: 1em;
 `;
 
@@ -17,8 +17,9 @@ const AccountItem = styled.div`
   border: 0.15em solid #e6007a;
   cursor: pointer;
 
-  ${({ active }) => active
-    && `
+  ${({ active }) =>
+    active &&
+    `
     background: #e6007a;
   `}
 
@@ -48,12 +49,10 @@ const AccountIcon = styled.span`
 `;
 
 const AccountAddress = styled.span`
-  font-size: .8em;
+  font-size: 0.8em;
   @media (max-width: 768px) {
     display: none;
   }
 `;
 
-export {
-  AccountList, AccountItem, AccountAlias, AccountIcon, AccountAddress,
-};
+export { AccountList, AccountItem, AccountAlias, AccountIcon, AccountAddress };

@@ -9,4 +9,3 @@ initApi()
     ReactDOM.render(<App api={api} />, document.getElementById("root"));
   })
   .catch(console.error);
-
