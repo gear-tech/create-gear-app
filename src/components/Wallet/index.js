@@ -1,14 +1,14 @@
 import { React, useEffect, useState } from 'react';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
-import SingIn from './SingIn';
-import Modal from './Modal';
-import AccountsList from './AccountList';
+import SignIn from '../SignIn';
+import Modal from '../Modal';
+import AccountsList from '../AccountList';
 
 const Wallet = ({ handleAccount, api }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [accounts, setAccouts] = useState(null);
   const [account, setAccout] = useState(null);
-  const [balance, setBalance] = useState(null);
+  const [freeBalance, setFreeBalance] = useState(null);
 
   // Toggle modal window
   const toggleModal = (event) => {
@@ -19,7 +19,7 @@ const Wallet = ({ handleAccount, api }) => {
   // Get balance for current account
   const getBalance = async (ADDR) => {
     const { data: balance } = await api.query.system.account(ADDR);
-    setBalance(balance.free.toHuman());
+    setFreeBalance(balance.free.toHuman());
   };
 
   // Setting current account and save it into the LocalStage
@@ -64,14 +64,14 @@ const Wallet = ({ handleAccount, api }) => {
 
   return (
     <>
-      <SingIn
+      <SignIn
         toggleModal={toggleModal}
         currentAccount={account}
-        balance={balance}
+        balance={freeBalance}
       />
       {isOpen && (
         <Modal
-          title="Sing In"
+          title="Sign In"
           content={
             accounts ? (
               <AccountsList list={accounts} toggleAccount={chooseAccount} />

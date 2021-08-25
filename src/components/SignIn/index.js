@@ -1,14 +1,16 @@
-import { React } from "react";
-import Identicon from "@polkadot/react-identicon";
-import { WalletWrapper, Wallet, AccountName, BalanceInfo } from "./styles";
+import { React } from 'react';
+import Identicon from '@polkadot/react-identicon';
+import {
+  WalletWrapper, Wallet, AccountName, BalanceInfo,
+} from './styles';
 
-const SingIn = ({ toggleModal, currentAccount, balance }) => {
-  let singIn;
+const SignIn = ({ toggleModal, currentAccount, balance }) => {
+  let signIn;
 
   if (currentAccount !== null) {
-    singIn = currentAccount.meta.name;
+    signIn = currentAccount.meta.name;
   } else {
-    singIn = "Sing In";
+    signIn = 'Sign In';
   }
 
   return (
@@ -22,10 +24,10 @@ const SingIn = ({ toggleModal, currentAccount, balance }) => {
             theme="polkadot"
           />
         )}
-        <AccountName>{singIn}</AccountName>
+        <AccountName>{signIn}</AccountName>
       </Wallet>
     </WalletWrapper>
   );
 };
 
-export default SingIn;
+export default SignIn;

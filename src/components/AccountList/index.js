@@ -1,19 +1,19 @@
-import { React } from "react";
-import Identicon from "@polkadot/react-identicon";
-import toShortAddress from "../../../utils";
+import { React } from 'react';
+import Identicon from '@polkadot/react-identicon';
+import toShortAddress from '../../utils';
 import {
   AccountList,
   AccountItem,
   AccountAlias,
   AccountIcon,
   AccountAddress,
-} from "./styles";
+} from './styles';
 
 const AccountsList = ({ list, toggleAccount }) => {
-  const account = list.map((account, index) => (
+  const accountItem = list.map((account, index) => (
     <AccountItem
       active={account.isActive}
-      key={index}
+      key={account.address}
       onClick={(e) => {
         toggleAccount(e, index);
       }}
@@ -26,7 +26,7 @@ const AccountsList = ({ list, toggleAccount }) => {
     </AccountItem>
   ));
 
-  return <AccountList>{account}</AccountList>;
+  return <AccountList>{accountItem}</AccountList>;
 };
 
 export default AccountsList;

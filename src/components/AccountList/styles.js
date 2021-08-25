@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const AccountList = styled.div`
   display: flex;
@@ -17,11 +17,7 @@ const AccountItem = styled.div`
   border: 0.15em solid #e6007a;
   cursor: pointer;
 
-  ${({ active }) =>
-    active &&
-    `
-    background: #e6007a;
-  `}
+  ${({ active }) => active && 'background: #e6007a;'}
 
   &:hover {
     background: #e6007a;
@@ -55,4 +51,6 @@ const AccountAddress = styled.span`
   }
 `;
 
-export { AccountList, AccountItem, AccountAlias, AccountIcon, AccountAddress };
+export {
+  AccountList, AccountItem, AccountAlias, AccountIcon, AccountAddress,
+};

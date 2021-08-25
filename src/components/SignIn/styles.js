@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const WalletWrapper = styled.div`
   display: flex;
@@ -26,4 +26,6 @@ const BalanceInfo = styled.div`
   padding: 0.7em 0.5em;
 `;
 
-export { WalletWrapper, Wallet, AccountName, BalanceInfo };
+export {
+  WalletWrapper, Wallet, AccountName, BalanceInfo,
+};

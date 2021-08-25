@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ModalWarapper = styled.div`
   position: fixed;
@@ -63,4 +63,6 @@ const Title = styled.h2`
   text-align: center;
 `;
 
-export { ModalWarapper, ModalBox, ModalCloseX, ModalClose, Title };
+export {
+  ModalWarapper, ModalBox, ModalCloseX, ModalClose, Title,
+};

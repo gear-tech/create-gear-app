@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@polkadot/api": "^5.5.2",
+    "@polkadot/api": "^5.6.1",
     "@polkadot/extension-dapp": "^0.39.3",
     "@polkadot/react-identicon": "^0.85.1",
     "@testing-library/jest-dom": "^5.11.4",
@@ -19,7 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .js,.jsx ."
+    
   },
   "eslintConfig": {
     "extends": [
