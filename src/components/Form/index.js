@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
+import { useAlert } from 'react-alert';
 import {
   Highlight,
   Label,
@@ -12,6 +13,8 @@ const Form = ({ account, api }) => {
   const [destination, setDestination] = useState('');
   const [amount, setAmount] = useState(0);
 
+  const alert = useAlert()
+
   // Form submit example
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,13 +25,13 @@ const Form = ({ account, api }) => {
 
     transferExtrinsic.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
       if (status.isInBlock) {
-        console.log(`Completed at block hash #${status.asInBlock.toString()}`);
+        alert.success(`Completed`);
       } else {
-        console.log(`Current status: ${status.type}`);
+        alert.show(`Current status: ${status.type}`);
       }
     })
       .catch((error) => {
-        console.log(':( transaction failed', error);
+        alert.error(':( transaction failed', error);
       });
   };
 
