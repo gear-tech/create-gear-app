@@ -9,9 +9,7 @@ import initApi from './api/api';
 // optional configuration
 const options = {
   position: positions.BOTTOM_CENTER,
-  timeout: 5000,
-  offset: '30px',
-  transition: transitions.SCALE
+  timeout: 5000
 }
 
 
