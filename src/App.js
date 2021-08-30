@@ -1,25 +1,27 @@
 import { React, useState, useCallback } from 'react';
+import { useApi } from './api/apiContext';
 import styled from 'styled-components';
 import Wallet from './components/Wallet';
 import Form from './components/Form';
 
-function App({ api }) {
+function App() {
   const [account, setAccout] = useState(null);
 
+  const { loading } = useApi();
   // Setting account state
   const handleAccount = useCallback((acc) => {
     setAccout(acc);
   }, []);
 
-  return (
+  return loading ? <p>Loading...</p> : (
     <AppContainer>
       <Header>
-        <Wallet handleAccount={handleAccount} api={api} />
+        <Wallet handleAccount={handleAccount}/>
       </Header>
       <main>
         <h1>Say Hi dApp</h1>
         <p>This is a simple demo dApp for getting started quickly. Happy hack!</p>
-        <Form account={account} api={api} />
+        <Form account={account}/>
       </main>
     </AppContainer>
   );

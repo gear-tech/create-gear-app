@@ -4,7 +4,7 @@ import { positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import './index.css';
 import App from './App';
-import initApi from './api/api';
+import { ApiProvider } from './api/apiContext';
 
 // optional configuration
 const options = {
@@ -12,13 +12,11 @@ const options = {
   timeout: 5000,
 };
 
-initApi()
-  .then((api) => {
-    ReactDOM.render(
-      <AlertProvider template={AlertTemplate} {...options}>
-        <App api={api} />
-      </AlertProvider>,
-      document.getElementById('root'),
-    );
-  })
-  .catch(console.error);
+ReactDOM.render(
+  <ApiProvider>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <App />
+    </AlertProvider>
+  </ApiProvider>,
+  document.getElementById('root'),
+);

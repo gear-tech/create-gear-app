@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import { useAlert } from 'react-alert';
+import { useApi } from '../../api/apiContext';
 import {
   Highlight,
   Label,
@@ -9,11 +10,12 @@ import {
   Button,
 } from './styles';
 
-const Form = ({ account, api }) => {
+const Form = ({ account }) => {
   const [destination, setDestination] = useState('');
   const [amount, setAmount] = useState(0);
 
-  const alert = useAlert()
+  const alert = useAlert();
+  const { api } = useApi();
 
   // Form submit example
   const handleSubmit = async (e) => {

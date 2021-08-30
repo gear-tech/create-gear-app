@@ -1,10 +1,15 @@
 import { React, useEffect, useState } from 'react';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
+import { useApi } from '../../api/apiContext';
 import SignIn from '../SignIn';
 import Modal from '../Modal';
 import AccountsList from '../AccountList';
 
-const Wallet = ({ handleAccount, api }) => {
+const Wallet = ({ handleAccount }) => {
+
+  const { api } = useApi();
+  console.log(api)
+
   const [isOpen, setIsOpen] = useState(false);
   const [accounts, setAccouts] = useState(null);
   const [account, setAccout] = useState(null);
