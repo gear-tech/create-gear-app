@@ -8,7 +8,6 @@ import AccountsList from '../AccountList';
 const Wallet = ({ handleAccount }) => {
 
   const { api } = useApi();
-  console.log(api)
 
   const [isOpen, setIsOpen] = useState(false);
   const [accounts, setAccouts] = useState(null);
