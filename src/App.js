@@ -3,25 +3,29 @@ import { useApi } from './api/apiContext';
 import styled from 'styled-components';
 import Wallet from './components/Wallet';
 import Form from './components/Form';
+import Loader from './components/Loader';
+
 
 function App() {
   const [account, setAccout] = useState(null);
-
   const { loading } = useApi();
+
   // Setting account state
   const handleAccount = useCallback((acc) => {
     setAccout(acc);
   }, []);
 
-  return loading ? <p>Loading...</p> : (
+  return loading ? (
+    <Loader />
+  ) : (
     <AppContainer>
       <Header>
-        <Wallet handleAccount={handleAccount}/>
+        <Wallet handleAccount={handleAccount} />
       </Header>
       <main>
         <h1>Say Hi dApp</h1>
         <p>This is a simple demo dApp for getting started quickly. Happy hack!</p>
-        <Form account={account}/>
+        <Form account={account} />
       </main>
     </AppContainer>
   );
