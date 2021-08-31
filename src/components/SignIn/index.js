@@ -3,8 +3,12 @@ import Identicon from '@polkadot/react-identicon';
 import {
   WalletWrapper, Wallet, AccountName, BalanceInfo,
 } from './styles';
+import { useUser } from '../../context/UserContext';
 
-const SignIn = ({ toggleModal, currentAccount, balance }) => {
+const SignIn = ({ toggleModal, currentAccount }) => {
+
+  const { freeBalance } = useUser();
+
   let signIn;
 
   if (currentAccount !== null) {
@@ -15,7 +19,7 @@ const SignIn = ({ toggleModal, currentAccount, balance }) => {
 
   return (
     <WalletWrapper>
-      {balance && <BalanceInfo>{balance}</BalanceInfo>}
+      <BalanceInfo>{freeBalance}</BalanceInfo>
       <Wallet onClick={toggleModal}>
         {currentAccount && (
           <Identicon

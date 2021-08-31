@@ -14,10 +14,9 @@ import {
 const Form = () => {
   const [destination, setDestination] = useState('');
   const [amount, setAmount] = useState(0);
-  const [account, setAccount] = useUser();
-
-  const alert = useAlert();
+  const { account } = useUser();
   const { api } = useApi();
+  const alert = useAlert();
 
   // Form submit example
   const handleSubmit = async (e) => {
