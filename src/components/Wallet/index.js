@@ -1,18 +1,17 @@
 import { React, useEffect, useState } from 'react';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
-import { useApi } from '../../api/apiContext';
+import { useApi } from '../../context/ApiContext';
+import { useUser } from '../../context/UserContext';
 import SignIn from '../SignIn';
 import Modal from '../Modal';
 import AccountsList from '../AccountList';
 
-const Wallet = ({ handleAccount }) => {
-
+const Wallet = () => {
   const { api } = useApi();
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [accounts, setAccouts] = useState(null);
-  const [account, setAccout] = useState(null);
+  const [accounts, setAccounts] = useState(null);
+  const [account, setAccount] = useUser();
   const [freeBalance, setFreeBalance] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Toggle modal window
   const toggleModal = (event) => {
@@ -37,8 +36,7 @@ const Wallet = ({ handleAccount }) => {
         getBalance(acc.address);
       }
     });
-    setAccout(accounts[index]);
-    handleAccount(accounts[index]);
+    setAccount(accounts[index]);
   };
 
   // Getting all existing accounts from Polkadot extension
@@ -56,32 +54,23 @@ const Wallet = ({ handleAccount }) => {
       allAccounts.forEach((acc) => {
         if (acc.address === localStorage.getItem('savedAccount')) {
           acc.isActive = true;
-          setAccout(acc);
+          setAccount(acc);
           getBalance(acc.address);
-          handleAccount(acc);
         }
       });
-      setAccouts(allAccounts);
+      setAccounts(allAccounts);
     };
     getAllAccounts();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
-      <SignIn
-        toggleModal={toggleModal}
-        currentAccount={account}
-        balance={freeBalance}
-      />
+      <SignIn toggleModal={toggleModal} currentAccount={account} balance={freeBalance} />
       {isOpen && (
         <Modal
           title="Sign In"
           content={
-            accounts ? (
-              <AccountsList list={accounts} toggleAccount={chooseAccount} />
-            ) : (
-              "Couldn't find the accounts"
-            )
+            accounts ? <AccountsList list={accounts} toggleAccount={chooseAccount} /> : "Couldn't find the accounts"
           }
           handleClose={toggleModal}
         />

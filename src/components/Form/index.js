@@ -1,7 +1,8 @@
 import { React, useState } from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import { useAlert } from 'react-alert';
-import { useApi } from '../../api/apiContext';
+import { useApi } from '../../context/ApiContext';
+import { useUser } from '../../context/UserContext';
 import {
   Highlight,
   Label,
@@ -10,9 +11,10 @@ import {
   Button,
 } from './styles';
 
-const Form = ({ account }) => {
+const Form = () => {
   const [destination, setDestination] = useState('');
   const [amount, setAmount] = useState(0);
+  const [account, setAccount] = useUser();
 
   const alert = useAlert();
   const { api } = useApi();

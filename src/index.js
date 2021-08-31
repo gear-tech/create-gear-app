@@ -4,7 +4,8 @@ import { positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import './index.css';
 import App from './App';
-import { ApiProvider } from './api/apiContext';
+import { ApiProvider } from './context/ApiContext';
+import { UserProvider } from './context/UserContext';
 
 // optional configuration
 const options = {
@@ -14,9 +15,11 @@ const options = {
 
 ReactDOM.render(
   <ApiProvider>
-    <AlertProvider template={AlertTemplate} {...options}>
-      <App />
-    </AlertProvider>
+    <UserProvider>
+      <AlertProvider template={AlertTemplate} {...options}>
+        <App />
+      </AlertProvider>
+    </UserProvider>
   </ApiProvider>,
   document.getElementById('root'),
 );
