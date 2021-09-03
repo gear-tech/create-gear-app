@@ -52,7 +52,7 @@ const Wallet = () => {
 
   return (
     <>
-      <SignIn toggleModal={toggleModal} currentAccount={account} />
+      <SignIn toggleModal={toggleModal} />
       {isOpen && (
         <Modal
           title="Sign In"

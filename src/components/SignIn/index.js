@@ -5,14 +5,14 @@ import {
 } from './styles';
 import { useUser } from '../../context/UserContext';
 
-const SignIn = ({ toggleModal, currentAccount }) => {
+const SignIn = ({ toggleModal }) => {
 
-  const { freeBalance } = useUser();
+  const { account, freeBalance } = useUser();
 
   let signIn;
 
-  if (currentAccount !== null) {
-    signIn = currentAccount.meta.name;
+  if (account !== null) {
+    signIn = account.meta.name;
   } else {
     signIn = 'Sign In';
   }
@@ -21,9 +21,9 @@ const SignIn = ({ toggleModal, currentAccount }) => {
     <WalletWrapper>
       <BalanceInfo>{freeBalance}</BalanceInfo>
       <Wallet onClick={toggleModal}>
-        {currentAccount && (
+        {account && (
           <Identicon
-            value={currentAccount.address}
+            value={account.address}
             size={28}
             theme="polkadot"
           />
