@@ -7,7 +7,7 @@ import AccountsList from '../AccountList';
 
 const Wallet = () => {
   const [accounts, setAccounts] = useState(null);
-  const { account, setAccount } = useUser();
+  const { setAccount } = useUser();
   const [isOpen, setIsOpen] = useState(false);
 
   // Toggle modal window
