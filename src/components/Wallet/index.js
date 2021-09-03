@@ -17,7 +17,7 @@ const Wallet = () => {
   };
 
   // Setting current account and save it into the LocalStage
-  const chooseAccount = (event, index) => {
+  const selectAccount = (event, index) => {
     event.stopPropagation();
     accounts.forEach((acc, i) => {
       acc.isActive = false;
@@ -38,9 +38,7 @@ const Wallet = () => {
       if (extensions.length === 0) {
         return;
       }
-
       const allAccounts = await web3Accounts();
-
       allAccounts.forEach((acc) => {
         if (acc.address === localStorage.getItem('savedAccount')) {
           acc.isActive = true;
@@ -59,7 +57,7 @@ const Wallet = () => {
         <Modal
           title="Sign In"
           content={
-            accounts ? <AccountsList list={accounts} toggleAccount={chooseAccount} /> : "Couldn't find the accounts"
+            accounts ? <AccountsList list={accounts} toggleAccount={selectAccount} /> : "Couldn't find the accounts"
           }
           handleClose={toggleModal}
         />
