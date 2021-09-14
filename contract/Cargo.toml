@@ -9,4 +9,7 @@ license = "GPL-3.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-gstd = { git = "https://github.com/gear-tech/gear", features = ["debug"] }
+gstd = { path = "https://github.com/gear-tech/gear/gstd", features = ["debug"] }
+gstd-meta = { path = "https://github.com/gear-tech/gear/gstd/gstd-meta" }
+scale-info = { version = "0.12.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
