@@ -1,11 +1,10 @@
-import { ApiPromise, WsProvider } from '@polkadot/api';
+import { GearApi } from '@gear-js/api';
 
 // Connecting to RPC node
 
 async function initApi() {
-  const wsProvider = new WsProvider('ws://127.0.0.1:9944');
-  const api = await ApiPromise.create({ provider: wsProvider });
-
+  const api = await GearApi.create();
+  console.log(api)
   return api;
 }
 
