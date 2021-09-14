@@ -8,15 +8,15 @@ export const useApi = () => {
 };
 
 export const ApiProvider = ({ children }) => {
-  const [api, setApi] = useState(null);
+  const [gear, setGear] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     initApi().then((result) => {
-      setApi(result);
+      setGear(result);
       setLoading(false);
     });
   }, []);
 
-  return <ApiContext.Provider value={{ api, loading }}>{children}</ApiContext.Provider>;
+  return <ApiContext.Provider value={{ gear, loading }}>{children}</ApiContext.Provider>;
 };

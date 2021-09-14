@@ -15,7 +15,7 @@ const Form = () => {
   const [destination, setDestination] = useState('');
   const [amount, setAmount] = useState(0);
   const { account } = useUser();
-  const { api } = useApi();
+  const { gear } = useApi();
   const alert = useAlert();
 
   // Form submit example
@@ -23,7 +23,7 @@ const Form = () => {
     e.preventDefault();
 
     const FROM_MILI = 1000000000000;
-    const transferExtrinsic = api.tx.balances.transfer(destination, amount * FROM_MILI);
+    const transferExtrinsic = gear.api.tx.balances.transfer(destination, amount * FROM_MILI);
     const injector = await web3FromSource(account.meta.source);
 
     transferExtrinsic.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {

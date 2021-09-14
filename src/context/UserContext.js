@@ -10,7 +10,7 @@ export const useUser = () => {
 export const UserProvider = ({ children }) => {
   const [account, setAccount] = useState(null);
   const [freeBalance, setFreeBalance] = useState(null);
-  const { loading, api } = useApi();
+  const { loading, gear } = useApi();
 
   const user = {
     account: account,
@@ -23,7 +23,7 @@ export const UserProvider = ({ children }) => {
     if (!loading) {
       // Get balance for current account
       const getBalance = async (ADDR) => {
-        const { data: balance } = await api.query.system.account(ADDR);
+        const { data: balance } = await gear.api.query.system.account(ADDR);
         setFreeBalance(balance.free.toHuman());
       };
       getBalance(account.address);
