@@ -1,5 +1,5 @@
 [package]
-name = "gear app"
+name = "gear-app"
 version = "0.1.0"
 authors = ["Gear Technologies"]
 edition = "2018"
@@ -9,7 +9,7 @@ license = "GPL-3.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-gstd = { path = "https://github.com/gear-tech/gear/gstd", features = ["debug"] }
-gstd-meta = { path = "https://github.com/gear-tech/gear/gstd/gstd-meta" }
+gstd = { git = "https://github.com/gear-tech/gear", features = ["debug"] }
+gstd-meta = { git = "https://github.com/gear-tech/gear" }
 scale-info = { version = "0.12.0", default-features = false, features = ["derive"] }
 codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
