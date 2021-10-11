@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@gear-js/api": "^0.1.1",
+    "@gear-js/api": "^0.4.14",
     "@polkadot/api": "^5.6.1",
     "@polkadot/extension-dapp": "^0.39.3",
     "@polkadot/react-identicon": "^0.85.1",
