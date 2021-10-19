@@ -31,7 +31,7 @@ if (code === 0 && projectDir !== __dirname) {
   sh.cp("-u", outFile, wasm);
 
 //   Check if Gear wasm-proc util already installed
-  if (sh.which('wasm-proc')) {
+  if (!sh.which('wasm-proc')) {
     sh.echo('Sorry, wasm-proc is not installed. Installing...');
     sh.exec('cargo install --git https://github.com/gear-tech/gear wasm-proc');
   } else {
