@@ -1,24 +1,14 @@
 import { GearApi } from '@gear-js/api';
-
+import { gearConfig } from '../config'
+ 
 // Connecting to RPC node
+
+const config = gearConfig(process.env.REACT_APP_NETWORK);
 
 async function initApi() {
   const gear = await GearApi.create({
-    customTypes: {
-      Action: {
-        _enum: {
-          AddMessage: {
-            author: 'String',
-            msg: 'String',
-          },
-          ViewMessages: 'Null',
-        },
-      },
-      MessageIn: {
-        author: 'String',
-        msg: 'String',
-      },
-    },
+    providerAddress: config.providerAddress,
+    customTypes: config.customTypes,
   });
   return gear;
 }
