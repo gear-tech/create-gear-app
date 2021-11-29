@@ -5,8 +5,8 @@
   "dependencies": {
     "@gear-js/api": "^0.8.14",
     "@polkadot/api": "^6.7.2",
-    "@polkadot/extension-dapp": "^0.39.3",
-    "@polkadot/react-identicon": "^0.85.1",
+    "@polkadot/extension-dapp": "^0.41.1",
+    "@polkadot/react-identicon": "^0.87.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
