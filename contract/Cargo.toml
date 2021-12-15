@@ -9,6 +9,10 @@ license = "GPL-3.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-gstd = { git = "https://github.com/gear-tech/gear", features = ["debug", "meta"] }
+gstd = { git = "https://github.com/gear-tech/gear", features = ["debug"] }
 scale-info = { version = "1.0.0", default-features = false, features = ["derive"] }
 codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
+
+[profile.release]
+lto = true
+opt-level = 's'
