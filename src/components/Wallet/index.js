@@ -14,7 +14,6 @@ const Wallet = () => {
     setIsOpen(!isOpen);
   };
 
-  
   return (
     <>
       <SignIn toggleModal={toggleModal} />
@@ -22,7 +21,11 @@ const Wallet = () => {
         <Modal
           title="Sign In"
           content={
-            allAccounts ? <AccountsList list={allAccounts} toggleAccount={selectAccount} /> : "Couldn't find the accounts"
+            allAccounts ? (
+              <AccountsList list={allAccounts} toggleAccount={selectAccount} />
+            ) : (
+              "Couldn't find the accounts"
+            )
           }
           handleClose={toggleModal}
         />

@@ -1,6 +1,7 @@
 const CONTRACT = process.env.REACT_APP_CONTRACT;
 
 export function gearConfig(env) {
+  
   const customTypes = {
     Action: {
       _enum: {

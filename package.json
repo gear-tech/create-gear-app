@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@gear-js/api": "^0.8.14",
+    "@gear-js/api": "^0.8.16",
     "@polkadot/api": "^6.7.2",
     "@polkadot/extension-dapp": "^0.41.1",
     "@polkadot/react-identicon": "^0.87.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.2",
+    "react": "17.0.2",
     "react-alert": "^7.0.3",
     "react-alert-template-basic": "^1.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "react-dom": "17.0.0",
+    "react-scripts": "5.0.0",
     "shelljs": "^0.8.4",
     "styled-components": "^5.3.0",
     "web-vitals": "^1.0.1"
@@ -22,8 +22,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:contract": "node contract/buildwasm.js",
     "test": "react-scripts test",
+    "build:contract": "node contract/buildwasm.js",
+    "build:types": "node contract/parseTypes.js",
     "eject": "react-scripts eject",
     "lint": "eslint --fix --ext .js,.jsx ."
   },
