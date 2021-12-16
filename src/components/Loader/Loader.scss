@@ -1,0 +1,13 @@
+.loader-wrapper {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loader-message {
+  color: #fefefe;
+  font-size: 1.5em;
+}

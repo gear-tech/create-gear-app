@@ -1,32 +1,32 @@
 {
-  "name": "create-gear-app",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@gear-js/api": "^0.8.16",
-    "@polkadot/api": "^6.7.2",
-    "@polkadot/extension-dapp": "^0.41.1",
-    "@polkadot/react-identicon": "^0.87.1",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "17.0.2",
-    "react-alert": "^7.0.3",
-    "react-alert-template-basic": "^1.0.2",
-    "react-dom": "17.0.0",
+    "@polkadot/api": "^6.12.1",
+    "@polkadot/extension-dapp": "^0.42.2",
+    "@polkadot/react-identicon": "^0.87.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
-    "shelljs": "^0.8.4",
-    "styled-components": "^5.3.0",
-    "web-vitals": "^1.0.1"
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "build:contract": "node contract/buildwasm.js",
-    "build:types": "node contract/parseTypes.js",
-    "eject": "react-scripts eject",
-    "lint": "eslint --fix --ext .js,.jsx ."
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "build:contract": "node contract/buildwasm.ts",
+    "build:types": "node contract/parseTypes.ts",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [
@@ -47,11 +47,6 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.24.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.3.2"
+    "react-app-rewired": "^2.1.8"
   }
 }
