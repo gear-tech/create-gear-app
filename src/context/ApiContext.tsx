@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import initApi from '../api/initApi';
+import { nodeApi } from '../api/initApi';
 
 type IContextProps = {
     api: any | null;
@@ -17,8 +17,8 @@ export const ApiProvider = ({ children } : any ) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    initApi().then((result) => {
-      setApi(result);
+    nodeApi.init().then(() => {
+      setApi(nodeApi.api);
       setLoading(false);
     });
   }, []);
