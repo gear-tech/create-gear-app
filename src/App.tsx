@@ -3,6 +3,7 @@ import { useApi } from './context/ApiContext';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { Loader } from './components/Loader/Loader';
 import { Wallet } from './components/Wallet/Wallet';
+import { Guestbook } from './components/Guesbook/Guesbook'
 
 import './App.css';
 
@@ -24,7 +25,7 @@ function App() {
 
           <div className="main-section-content">
             <div className="container">
-              <h2>Hello world</h2>
+              <Guestbook />
             </div>
           </div>
         </>

@@ -1,0 +1,83 @@
+.message-form {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-form__label {
+  margin-bottom: 5px;
+}
+
+.message-form__message {
+  flex: 1 1 auto;
+  height: 58px;
+  font-family: 'Prompt', sans-serif;
+  font-size: 19px;
+  color: #282828;
+  line-height: 58px;
+  border: none;
+  background: none;
+  border-radius: 2px;
+  padding: 0 8px 0 25px;
+  margin-bottom: 10px;
+  background: #ffffff;
+
+  &::-webkit-input-placeholder {
+    color: #bcbcbc;
+  }
+
+  @media screen and (max-width: 459px) {
+    font-size: 16px;
+    padding: 0 3px 0 20px;
+  }
+}
+
+.message-form__value {
+  height: 58px;
+  width: 100px;
+  padding: 0 8px 0 25px;
+  font-size: 19px;
+  color: #efdede;
+  background: none;
+  border: 2px solid #bcbcbc;
+  border-radius: 2px;
+}
+
+.message-form__button {
+  display: inline-flex;
+  justify-content: center;
+  font-family: 'Prompt', sans-serif;
+  height: 60px;
+  font-weight: 500;
+  font-size: 17px;
+  color: #fff;
+  line-height: 60px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 0 40px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.message-form__button.success {
+  background: #2bd071;
+
+  &:hover {
+    background: #12582f;
+  }
+
+  &:disabled {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
