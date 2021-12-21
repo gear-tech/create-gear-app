@@ -1,5 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
+// Copyright 2021-2022 @gear-tech/create-gear-app authors & contributors
+// This software may be modified and distributed under the terms
+// of the Apache-2.0 license. See the LICENSE file for details.
+
+import React, { useContext, useEffect, useState, useCallback } from 'react';
+import { InjectedExtension } from '@polkadot/extension-inject/types';
+
 import { UserAccount } from '../types/user';
 import { useApi } from '../context/ApiContext';
 
@@ -21,33 +26,32 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }: any) => {
-  const [currentAccount, setCurrentAccount] = useState<UserAccount | null>(
-    null,
-  );
-  const [injectedAccounts, setInjectedAccounts] = useState<
-    UserAccount[] | null
-  >(null);
+  const [currentAccount, setCurrentAccount] = useState<UserAccount | null>(null);
+  const [injectedAccounts, setInjectedAccounts] = useState<UserAccount[] | null>(null);
   const [accountBalance, setAccountBalance] = useState<string | null>(null);
 
   const { api } = useApi();
 
-  const getAllAccounts = async () => {
-    const extensions = await web3Enable('MyGearApp');
+  /**
+   * Fetch accounts from the extension
+   */
 
-    if (extensions.length === 0) {
-      return;
-    }
+  const fetchAccounts = useCallback(async () => {
+    if (typeof window !== `undefined`) {
+      const { web3Accounts, web3Enable, isWeb3Injected } = await import(
+        '@polkadot/extension-dapp'
+      );
 
-    const allAccounts: UserAccount[] = await web3Accounts();
+      const extensions: InjectedExtension[] = await web3Enable('Gear App');
 
-    allAccounts.forEach((acc) => {
-      if (acc.address === localStorage.getItem('savedAccount')) {
-        acc.isActive = true;
-        setCurrentAccount(acc);
+      if (isWeb3Injected) {
+        const accounts: UserAccount[] = await web3Accounts();
+        return accounts;
+      } else {
+        return null;
       }
-    });
-    setInjectedAccounts(allAccounts);
-  };
+    }
+  }, []);
 
   const selectAccount = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -75,9 +79,19 @@ export const UserProvider = ({ children }: any) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      getAllAccounts();
-    }, 100);
+    fetchAccounts()
+      .then((allAccounts) => {
+        if (allAccounts) {
+          allAccounts.forEach((account: UserAccount) => {
+            if (account.address === localStorage.getItem('savedAccount')) {
+              account.isActive = true;
+              setCurrentAccount(account);
+            }
+          });
+          setInjectedAccounts(allAccounts);
+        }
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
