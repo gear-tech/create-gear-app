@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApi } from './context/ApiContext';
+import { useApi } from './context/ApiPromiseContext';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { Loader } from './components/Loader/Loader';
 import { Wallet } from './components/Wallet/Wallet';
@@ -8,11 +8,11 @@ import { Guestbook } from './components/Guesbook/Guesbook'
 import './App.css';
 
 function App() {
-  const { loading } = useApi();
+  const { isApiReady } = useApi();
 
   return (
     <div className="wrapper">
-      {(loading && <Loader />) || (
+      {(!isApiReady && <Loader />) || (
         <>
           <section className="header-section">
             <div className="container">

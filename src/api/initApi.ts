@@ -1,10 +1,5 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import { REACT_APP_NETWORK } from '../const';
-
-export interface UserAccount extends InjectedAccountWithMeta {
-  isActive?: boolean;
-}
 
 class NodeApi {
   get api(): ApiPromise | null {
