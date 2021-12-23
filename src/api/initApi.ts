@@ -1,8 +1,8 @@
-import { ApiPromise, WsProvider } from '@polkadot/api';
+import { GearApi } from '@gear-js/api';
 import { REACT_APP_NETWORK } from '../const';
 
 class NodeApi {
-  get api(): ApiPromise | null {
+  get api(): GearApi | null {
     return this._api;
   }
 
@@ -10,7 +10,7 @@ class NodeApi {
 
   private chain: string | null;
 
-  private _api: ApiPromise | null = null;
+  private _api: GearApi | null = null;
 
   constructor(address = 'ws://localhost:9944') {
     this.address = address;
@@ -19,9 +19,8 @@ class NodeApi {
 
   async init() {
     
-    const wsProvider = new WsProvider(this.address);
-    this._api = await ApiPromise.create({ provider: wsProvider });
-
+    this._api = await GearApi.create({ providerAddress: this.address });
+  
   }
 }
 
