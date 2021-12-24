@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@gear-js/api": "^0.8.16",
-    "@polkadot/api": "^6.12.1",
+    "@gear-js/api": "file:/Users/eugeneway/work/gear-js/api/api",
+    "@polkadot/api": "^6.7.2",
     "@polkadot/extension-dapp": "^0.42.2",
     "@polkadot/react-identicon": "^0.87.5",
     "@testing-library/jest-dom": "^5.14.1",
@@ -36,9 +36,11 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "chrome >= 67",
+      "edge >= 79",
+      "firefox >= 68",
+      "opera >= 54",
+      "safari >= 14"
     ],
     "development": [
       "last 1 chrome version",
@@ -47,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "buffer": "^6.0.3",
     "react-app-rewired": "^2.1.8"
   }
 }
