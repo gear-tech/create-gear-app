@@ -18,9 +18,11 @@ class NodeApi {
   }
 
   async init() {
-    
-    this._api = await GearApi.create({ providerAddress: this.address });
-  
+
+    this._api = await GearApi.create({
+      providerAddress: this.address
+    });
+
   }
 }
 

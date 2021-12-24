@@ -3,12 +3,12 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import React, { useContext, useEffect, useState } from 'react';
-import { ApiPromise } from '@polkadot/api';
+import { GearApi } from '@gear-js/api';
 import { nodeApi } from '../api/initApi';
 
 
 export interface ApiPromiseContext {
-  api: ApiPromise
+  api: GearApi
   isApiReady: boolean;
 }
 
@@ -29,5 +29,5 @@ export const ApiPromiseProvider = ({ children } : any ) => {
     });
   }, []);
 
-  return <ApiPromiseContext.Provider value={{ api, isApiReady: isReady }}>{children}</ApiPromiseContext.Provider>
+  return <ApiPromiseContext.Provider value={{ api, isApiReady: isReady }}>{children}</ApiPromiseContext.Provider>;
 };
