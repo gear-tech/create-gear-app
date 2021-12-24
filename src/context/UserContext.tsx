@@ -7,6 +7,7 @@ import { InjectedExtension } from '@polkadot/extension-inject/types';
 
 import { UserAccount } from '../types/user';
 import { useApi } from './ApiPromiseContext';
+import { nodeApi } from '../api/initApi';
 
 type InitContextProps = {
   currentAccount: UserAccount | null;
@@ -26,8 +27,12 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }: any) => {
-  const [currentAccount, setCurrentAccount] = useState<UserAccount | null>(null);
-  const [injectedAccounts, setInjectedAccounts] = useState<UserAccount[] | null>(null);
+  const [currentAccount, setCurrentAccount] = useState<UserAccount | null>(
+    null,
+  );
+  const [injectedAccounts, setInjectedAccounts] = useState<
+    UserAccount[] | null
+  >(null);
   const [accountBalance, setAccountBalance] = useState<string | null>(null);
 
   const { api } = useApi();
@@ -94,16 +99,38 @@ export const UserProvider = ({ children }: any) => {
       .catch((err) => console.error(err));
   }, []);
 
-  useEffect(() => {
-    const getBalance = async (ADDR: string) => {
-      const { free } = await api.query.balances.account(ADDR);
-      setAccountBalance(free.toHuman());
-    };
+  const getBalance = useCallback(
+    async (ADDR: string) => {
+      const freeBalance = await api.balance.findOut(ADDR);
+      return freeBalance;
+    },
+    [api],
+  );
 
+  // Get account balance
+
+  useEffect(() => {
     if (currentAccount && api) {
-      getBalance(currentAccount.address);
+      getBalance(currentAccount.address).then((result) => {
+        setAccountBalance(result.toHuman());
+      });
     }
-  }, [currentAccount, api]);
+  }, [currentAccount, api, getBalance]);
+
+
+  // Listen to balance changes
+
+  useEffect(() => {
+    if (currentAccount) {
+      nodeApi.subscribeBalanceChange(currentAccount.address, (balance) => {
+        setAccountBalance(balance.toHuman());
+      });
+    }
+
+    return () => {
+      nodeApi.unsubscribeBalanceChange();
+    };
+  }, [currentAccount]);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
