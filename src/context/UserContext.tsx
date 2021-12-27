@@ -117,7 +117,6 @@ export const UserProvider = ({ children }: any) => {
     }
   }, [currentAccount, api, getBalance]);
 
-
   // Listen to balance changes
 
   useEffect(() => {

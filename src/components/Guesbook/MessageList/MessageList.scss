@@ -1,0 +1,85 @@
+/* messages list */
+
+.messages-list {
+  width: 100%;
+  max-width: 600px;
+  height: 580px;
+  overflow: hidden;
+}
+
+.messages-list__message {
+  padding-bottom: 20px;
+}
+
+.messages-list__message:last-child {
+  padding-bottom: 0;
+}
+
+.messages-list__message-list .message {
+  padding-right: 30px;
+}
+
+.messages-list__user-info {
+  display: flex;
+}
+
+.messages-list__user-info {
+  padding-bottom: 10px;
+}
+
+.messages-list__user-icon {
+  padding-right: 15px;
+}
+
+.messages-list__user-icon img {
+  width: 26px;
+}
+
+.messages-list__user-name {
+  font-weight: 500;
+  font-size: 17px;
+  color: #fff;
+}
+
+.messages-list__user-message {
+  font-size: 16px;
+  color: #fff;
+  line-height: 24px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.messages-list__user-message {
+  margin-left: 42px;
+}
+
+.messages-list__user-message p:last-child {
+  padding-bottom: 0;
+}
+
+.message-form + .messages-list {
+  margin-top: 80px;
+}
+
+.jspVerticalBar {
+  width: 3px;
+  z-index: 1;
+  background: none;
+}
+
+.scroll {
+  overflow-y: scroll;
+}
+
+@media screen and (max-width: 767px) {
+  .messages-list__message {
+    padding-right: 15px;
+  }
+
+  .message-form + .messages-list {
+    margin-top: 50px;
+  }
+}
+
+/* end messages list */
