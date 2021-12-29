@@ -1,7 +1,6 @@
 const sh = require("shelljs");
 const path = require("path");
 const fs = require("fs");
-const { getWasmMetadata } = require("@gear-js/api");
 
 const projectDir = sh.pwd().toString();
 
@@ -13,7 +12,7 @@ const debug = process.argv.pop() === "--debug";
 // check out if we have 'debug' flag in options
 const buildCmd = debug
   ? "cargo +nightly build"
-  : "cargo +nightly build --release";
+  : "cargo +nightly build --release --all-features";
 
 // Run cargo build command and save exit code
 const { code } = sh.exec(buildCmd);
