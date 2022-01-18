@@ -15,8 +15,8 @@ type Message = {
 
 export const MessageList = ({ list }: Props) => {
   const MessageItem = list.map((item: Message, index: number) => (
-    <div className="messages-list__message">
-      <div className="messages-list__user-info" key={index}>
+    <div className="messages-list__message" key={index}>
+      <div className="messages-list__user-info">
         <div className="messages-list__user-icon">
           <Identicon value={item.address} size={25} theme="polkadot" />
         </div>
