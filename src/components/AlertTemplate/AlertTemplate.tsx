@@ -12,7 +12,7 @@ const alertStyle = {
   alignItems: 'center',
   textAlign: 'center',
   boxShadow: '0px 2px 2px 2px rgba(0, 0, 0, 0.03)',
-  width: '100%',
+  width: '300px',
   boxSizing: 'border-box',
 };
 

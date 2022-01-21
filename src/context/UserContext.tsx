@@ -43,19 +43,22 @@ export const UserProvider = ({ children }: any) => {
 
   const fetchAccounts = useCallback(async () => {
     if (typeof window !== `undefined`) {
-      const { web3Accounts, web3Enable, isWeb3Injected } = await import(
+      const { web3Accounts, web3Enable } = await import(
         '@polkadot/extension-dapp'
       );
 
       const extensions: InjectedExtension[] = await web3Enable('Gear App');
 
-      if (isWeb3Injected) {
-        const accounts: UserAccount[] = await web3Accounts();
-        return accounts;
-      } else {
+      if (extensions.length === 0) {
         return null;
       }
+
+      const accounts: UserAccount[] = await web3Accounts();
+
+      return accounts;
     }
+
+    return null;
   }, []);
 
   const selectAccount = (
@@ -84,19 +87,21 @@ export const UserProvider = ({ children }: any) => {
   };
 
   useEffect(() => {
-    fetchAccounts()
-      .then((allAccounts) => {
-        if (allAccounts) {
-          allAccounts.forEach((account: UserAccount) => {
-            if (account.address === localStorage.getItem('savedAccount')) {
-              account.isActive = true;
-              setCurrentAccount(account);
-            }
-          });
-          setInjectedAccounts(allAccounts);
-        }
-      })
-      .catch((err) => console.error(err));
+    setTimeout(() => {
+      fetchAccounts()
+        .then((allAccounts) => {
+          if (allAccounts) {
+            allAccounts.forEach((account: UserAccount) => {
+              if (account.address === localStorage.getItem('savedAccount')) {
+                account.isActive = true;
+                setCurrentAccount(account);
+              }
+            });
+            setInjectedAccounts(allAccounts);
+          }
+        })
+        .catch((err) => console.error(err));
+    }, 300);
   }, []);
 
   const getBalance = useCallback(

@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
+import { useAlert } from 'react-alert';
+import { useApi } from '../../../context/ApiPromiseContext';
+import { useUser } from '../../../context/UserContext';
+import { CONTRACT_ADDRESS, REGISTRY_TYPES } from '../../../config';
+import { sendMessageToProgram } from '../../../service/SendMessage';
+
 import './Form.scss';
 
 export const Form = () => {
+  const alert = useAlert();
+  const { api } = useApi();
+  const { currentAccount } = useUser();
+
   const [messageContext, setMessageContext] = useState<string>('');
   const [valueContext, setValueContext] = useState<number>(0);
 
-  // Search submit example
+  // Example of sending a message to the program
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(messageContext);
-    console.log(valueContext);
+
+    sendMessageToProgram(
+      api,
+      CONTRACT_ADDRESS,
+      300_000_000,
+      { AddMessage: messageContext },
+      { handle_input: 'Action', types: REGISTRY_TYPES },
+      currentAccount!,
+      alert
+    );
   };
 
   return (

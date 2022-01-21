@@ -3,7 +3,7 @@ import { GearApi } from '@gear-js/api';
 import { UserAccount } from '../types/user';
 import { InjectedExtension } from '@polkadot/extension-inject/types';
 
-export const sendMessage = async (api: GearApi, destination: string, gas: number, payload: any, abi: any, account: UserAccount, callback?: any) => {
+export const sendMessageToProgram = async (api: GearApi, destination: string, gas: number, payload: any, types: any, account: UserAccount, alert: any, callback?: any) => {
   const injector: InjectedExtension = await web3FromSource(account.meta.source);
 
   try {
@@ -14,18 +14,19 @@ export const sendMessage = async (api: GearApi, destination: string, gas: number
       value: 0,
     };
     
-    await api.message.submit(message, abi);
+    await api.message.submit(message, types);
   } catch (error) {
     console.error(`${error}`);
   }
 
   try {
     await api.message.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
-        console.log(`Current status: ${status}`);
+        alert.info(`${status}`)
     });
-    console.log(`Completed`);
-    callback();
+    alert.success(`Completed`)
+    
   } catch (error) {
-    console.error(':( transaction failed', error);
+    alert.error(`${error}`)
+    console.error('transaction failed', error);
   }
 };
