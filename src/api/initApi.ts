@@ -31,7 +31,7 @@ class NodeApi {
   public subscribeBalanceChange(address: string, cb: (event: Balance) => void) {
     if (this._api && !('balanceEvents' in this.subscriptions)) {
       this.subscriptions.balanceEvents =
-        this._api.gearEvents.subsribeBalanceChange(address, (val: any) => {
+        this._api.gearEvents.subscribeToBalanceChange(address, (val: any) => {
           cb(val);
         });
     }
