@@ -3,16 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { ApiPromiseProvider } from './context/ApiPromiseContext';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import { AlertTemplate } from './components/AlertTemplate';
 import { UserProvider } from './context/UserContext';
 import { ModalProvider } from './context/ModalContext';
+
+const options = {
+  position: positions.BOTTOM_CENTER,
+  timeout: 5000,
+  offset: '30px',
+  transition: transitions.SCALE,
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <ApiPromiseProvider>
       <UserProvider>
-        <ModalProvider>
-          <App />
-        </ModalProvider>
+        <AlertProvider template={AlertTemplate} {...options}>
+          <ModalProvider>
+            <App />
+          </ModalProvider>
+        </AlertProvider>
       </UserProvider>
     </ApiPromiseProvider>
   </React.StrictMode>,
