@@ -8,7 +8,7 @@ const packageName = require("fs")
     .toString()
     .match(/name = "([^"]+)"/)[1];
 
-const wasm = `${projectDir}/src/out/${packageName}.meta.wasm`;
+const wasm = `${projectDir}/srcout/${packageName}.meta.wasm`;
 
 const BuildTypes = async (wasm) => {
   const wasmBuffer = await fs.readFileSync(wasm);

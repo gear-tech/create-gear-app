@@ -11,9 +11,10 @@
 # production
 /build
 
-#contract
-/contract/target
-/contract/Cargo.lock
+# contract
+contract/target/
+contract/Cargo.lock
+contract/.cargo
 
 #out
 /src/out
