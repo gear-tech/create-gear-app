@@ -1,34 +1,61 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Welcome } from './Welcome/Welcome';
 import { Form } from './Form/Form';
+import { useAlert } from 'react-alert';
+import { useApi } from '../../context/ApiPromiseContext';
+import { useUser } from '../../context/UserContext';
+import { CONTRACT_ADDRESS, REGISTRY_TYPES } from '../../config';
+import { sendMessageToProgram } from '../../service/SendMessage';
 import { MessageList } from './MessageList/MessageList';
 
 export const Guestbook = () => {
+  const alert = useAlert();
+  const { api } = useApi();
+  const { currentAccount } = useUser();
 
-  const list = [
-    {
-      address: 'DchivRo8afQEiK731M3MtFZwbAE1tj3zzUFCpiZqpy1zYLE',
-      msg: 'Hello is it me?'
-    },
-    {
-      address: '14zy72LYvcMiUzsacFSR1xzQsG84Pujby98LvWSVtzSiS3ti',
-      msg: 'Hello is it me?'
-    },
-    {
-      address: '13rvhBRU2Hmnk68AVn5igNnaBU91MG38SHMB9Bo3r8p8vsWa',
-      msg: 'Hello is it me?'
-    },
-    {
-      address: '1REAJ1k691g5Eqqg9gL7vvZCBG7FCCZ8zgQkZWd4va5ESih',
-      msg: 'Hello is it me?'
-    }
-  ]
+  const [messages, setMessages] = useState<any>([]);
+  const [refreshPage, setRefreshPage] = useState(false);
+
+  const readState = useCallback(async () => {
+
+    const response = await fetch('guestbook.meta.wasm');
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const state = await api.programState.read(
+      CONTRACT_ADDRESS as '0x${string}',
+      buffer,
+    );
+    setMessages(state.toHuman());
+  }, []);
+
+  useEffect(() => {
+    readState();
+  }, [refreshPage]);
+
+  const handleSubmit = (event: React.MouseEvent<HTMLElement>, text: string) => {
+    // Example of sending a message to the program
+    event.preventDefault();
+
+    sendMessageToProgram(
+      api,
+      CONTRACT_ADDRESS,
+      300_000_000,
+      { AddMessage: text },
+      { handle_input: 'Action', types: REGISTRY_TYPES },
+      currentAccount!,
+      alert,
+      () => {
+        setRefreshPage(!refreshPage);
+      },
+    );
+  };
 
   return (
     <>
       <Welcome />
-      <Form />
-      <MessageList list={list}/>
+      <Form handleSubmit={handleSubmit} />
+      <MessageList messages={messages} />
     </>
   );
 };

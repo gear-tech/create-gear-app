@@ -24,6 +24,10 @@ export const sendMessageToProgram = async (api: GearApi, destination: string, ga
         alert.info(`${status}`)
     });
     alert.success(`Completed`)
+
+    if(callback) {
+      callback();
+    }
     
   } catch (error) {
     alert.error(`${error}`)

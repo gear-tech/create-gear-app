@@ -1,6 +1,8 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = function override(config, env) {
+
   config.resolve.alias = {
     ...config.resolve.alias,
     'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
@@ -19,6 +21,15 @@ module.exports = function override(config, env) {
       Buffer: ['buffer', 'Buffer'],
     }),
   );
+
+  config.experiments = {
+    asyncWebAssembly: true,
+  };
+
+  config.module.rules.push({ 
+    test: /\.wasm$/,
+    type: 'webassembly/async'
+  });
 
   return config;
 };

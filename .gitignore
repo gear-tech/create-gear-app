@@ -12,7 +12,11 @@
 /build
 
 #contract
-contract/target
+/contract/target
+/contract/Cargo.lock
+
+#out
+/src/out
 
 # misc
 .DS_Store

@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
-import { useAlert } from 'react-alert';
-import { useApi } from '../../../context/ApiPromiseContext';
-import { useUser } from '../../../context/UserContext';
-import { CONTRACT_ADDRESS, REGISTRY_TYPES } from '../../../config';
-import { sendMessageToProgram } from '../../../service/SendMessage';
 
 import './Form.scss';
 
-export const Form = () => {
-  const alert = useAlert();
-  const { api } = useApi();
-  const { currentAccount } = useUser();
+export const Form = ({ handleSubmit }: any) => {
 
   const [messageContext, setMessageContext] = useState<string>('');
   const [valueContext, setValueContext] = useState<number>(0);
-
-  // Example of sending a message to the program
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-
-    sendMessageToProgram(
-      api,
-      CONTRACT_ADDRESS,
-      300_000_000,
-      { AddMessage: messageContext },
-      { handle_input: 'Action', types: REGISTRY_TYPES },
-      currentAccount!,
-      alert
-    );
-  };
 
   return (
     <form className="message-form">
@@ -69,7 +46,7 @@ export const Form = () => {
             onClick={() => setValueContext(valueContext + 1)}
           ></span>
         </div>
-        <button className="message-form__button success" onClick={handleSubmit}>
+        <button className="message-form__button success" onClick={(event) => {handleSubmit(event, messageContext)}}>
           Add message
         </button>
       </footer>
