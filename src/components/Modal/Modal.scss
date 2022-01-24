@@ -15,6 +15,7 @@
 .modal__box {
   width: 100%;
   max-width: 485px;
+  max-height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +66,9 @@
   margin: 0;
 }
 
-.modal__text {
+.modal__content {
+  height: 100%;
+  overflow-y: auto;
   color: #ffffff;
 }
 

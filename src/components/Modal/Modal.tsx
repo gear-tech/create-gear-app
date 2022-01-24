@@ -14,11 +14,11 @@ export const Modal = ({ content, handleClose, ...props }: Props) => (
     <div className="modal__box">
       <button className="modal__close" onClick={handleClose} type="button">
         <span className="modal__close-x">
-          <CloseSVG  />
+          <CloseSVG />
         </span>
       </button>
       {props.title && <h2 className="modal__title">{props.title}</h2>}
-      <div className="modal__text">{content}</div>
+      <div className="modal__content">{content}</div>
     </div>
   </div>
 );
