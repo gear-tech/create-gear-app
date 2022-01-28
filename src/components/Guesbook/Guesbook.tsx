@@ -22,10 +22,14 @@ export const Guestbook = () => {
     const arrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
+    console.log(buffer)
+    console.log(CONTRACT_ADDRESS)
+
     const state = await api.programState.read(
-      CONTRACT_ADDRESS as '0x${string}',
+      CONTRACT_ADDRESS,
       buffer,
     );
+    console.log(state)
     setMessages(state.toHuman());
   }, []);
 
