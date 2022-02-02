@@ -39,6 +39,7 @@ export const ModalProvider = ({ children }: any) => {
               <AccountList
                 list={injectedAccounts}
                 toggleAccount={selectAccount}
+                handleClose={toggleModal}
               />
             ) : (
               <div className="user-wallet__msg">

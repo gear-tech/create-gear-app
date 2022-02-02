@@ -9,9 +9,10 @@ import './AccountList.scss';
 type Props = {
   list: Array<UserAccount>;
   toggleAccount: (event: any, index: number) => void;
+  handleClose: () => void;
 };
 
-export const AccountList: FC<Props> = ({ list, toggleAccount }: Props) => {
+export const AccountList: FC<Props> = ({ list, toggleAccount, handleClose }: Props) => {
   const accountItem = list.map((account: UserAccount, index: number) => (
     <button
       type="button"
@@ -19,6 +20,7 @@ export const AccountList: FC<Props> = ({ list, toggleAccount }: Props) => {
       key={account.address}
       onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
         toggleAccount(event, index);
+        handleClose();
       }}
     >
       <span className="account-list__icon">
