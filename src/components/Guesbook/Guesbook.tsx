@@ -17,19 +17,11 @@ export const Guestbook = () => {
   const [refreshPage, setRefreshPage] = useState(false);
 
   const readState = useCallback(async () => {
-
     const response = await fetch('guestbook.meta.wasm');
     const arrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    console.log(buffer)
-    console.log(CONTRACT_ADDRESS)
-
-    const state = await api.programState.read(
-      CONTRACT_ADDRESS,
-      buffer,
-    );
-    console.log(state)
+    const state = await api.programState.read(CONTRACT_ADDRESS, buffer);
     setMessages(state.toHuman());
   }, []);
 

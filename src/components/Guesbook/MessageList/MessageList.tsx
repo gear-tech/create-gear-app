@@ -1,7 +1,6 @@
 import React from 'react';
 import Identicon from '@polkadot/react-identicon';
 import { toShortAddress } from '../../../utils';
-import { Ripple } from '../../Ripple/Ripple';
 
 import './MessageList.scss';
 
