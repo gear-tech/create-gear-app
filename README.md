@@ -20,9 +20,37 @@ A ready-made application template with a well-thought-out infrastructure for qui
 
 # Getting Started
 
-// TODO
+Configure basic dApp in .env:
+
+```shell
+REACT_APP_NETWORK
+REACT_APP_CONTRACT_ADDRESS
+REACT_APP_REGISTRY_TYPES
+```
+
+`REACT_APP_NETWORK` is Gear network address (wss://rpc-node.gear-tech.io:443)
+`REACT_APP_CONTRACT_ADDRESS` is Gear contract address
+`REACT_APP_REGISTRY_TYPES` is registry types for encode/decode data
+
+To get `types` run:
+
+```shell
+yarn run build:contract
+```
+
+`opt.wasm` and `meta.wasm` files should appear in `src/out`
+
+```shell
+yarn run build:types
+```
+
+To run:
+
+``shell
+yarn run start
+```
 
 # License
 
-This repository is distributed under the terms of both the MIT license and the Apache License (Version 2.0).
-See [LICENSE](LICENSE) and [LICENSE-APACHE](LICENSE-APACHE) for details.
+The source code is licensed under GPL v3.0 license.
+See [LICENSE](LICENSE) for details.
