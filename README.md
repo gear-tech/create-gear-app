@@ -9,14 +9,14 @@ A ready-made application template with a well-thought-out infrastructure for qui
 - Configured app ready to use with @gear-js/@polkadot-js library
 - Gear Api Context
 - User Context
-- Wallet component (Integration with Polkadot-js extansiopn)
+- Wallet component (Integration with Polkadot-js extension)
 - Alert component
 - SendMessage to program service
 - Read State service
 - Build contract script
 - Read meta types script
 - Gear contract example on Rust (Guestbook)
-- Gear dApp frontend exapmle (Guesbook)
+- Gear dApp frontend example (Guesbook)
 
 # Getting Started
 
