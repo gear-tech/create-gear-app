@@ -28,9 +28,9 @@ REACT_APP_CONTRACT_ADDRESS
 REACT_APP_REGISTRY_TYPES
 ```
 
-`REACT_APP_NETWORK` is Gear network address (wss://rpc-node.gear-tech.io:443)
-`REACT_APP_CONTRACT_ADDRESS` is Gear contract address
-`REACT_APP_REGISTRY_TYPES` is registry types for encode/decode data
+- `REACT_APP_NETWORK` is Gear network address (wss://rpc-node.gear-tech.io:443)
+- `REACT_APP_CONTRACT_ADDRESS` is Gear contract address
+- `REACT_APP_REGISTRY_TYPES` is registry types for encode/decode data
 
 To get `types` run:
 
@@ -46,7 +46,7 @@ yarn run build:types
 
 To run:
 
-``shell
+```shell
 yarn run start
 ```
 
