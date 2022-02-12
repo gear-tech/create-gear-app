@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Welcome } from './Welcome/Welcome';
-import { Form } from './Form/Form';
-import { useAlert } from 'react-alert';
-import { useApi } from '../../context/ApiPromiseContext';
-import { useUser } from '../../context/UserContext';
-import { CONTRACT_ADDRESS, REGISTRY_TYPES } from '../../config';
-import { sendMessageToProgram } from '../../service/SendMessage';
-import { MessageList } from './MessageList/MessageList';
+import React, { useCallback, useEffect, useState } from "react";
+import { Welcome } from "./Welcome/Welcome";
+import { Form } from "./Form/Form";
+import { useAlert } from "react-alert";
+import { useApi } from "../../context/ApiPromiseContext";
+import { useUser } from "../../context/UserContext";
+import { CONTRACT_ADDRESS, REGISTRY_TYPES } from "../../config";
+import { sendMessageToProgram } from "../../service/SendMessage";
+import { MessageList } from "./MessageList/MessageList";
 
 export const Guestbook = () => {
   const alert = useAlert();
@@ -17,17 +17,16 @@ export const Guestbook = () => {
   const [refreshPage, setRefreshPage] = useState(false);
 
   const readState = useCallback(async () => {
-    const response = await fetch('guestbook.meta.wasm');
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    const state = await api.programState.read(CONTRACT_ADDRESS, buffer);
+    // @ts-ignore
+    // TODO: add type
+    const buffer = await import("../../out/guestbook.meta.wasm");
+    const state = await api.programState.read(CONTRACT_ADDRESS, buffer.default);
     setMessages(state.toHuman());
-  }, []);
+  }, [api.programState]);
 
   useEffect(() => {
     readState();
-  }, [refreshPage]);
+  }, [readState]);
 
   const handleSubmit = (event: React.MouseEvent<HTMLElement>, text: string) => {
     // Example of sending a message to the program
@@ -38,12 +37,12 @@ export const Guestbook = () => {
       CONTRACT_ADDRESS,
       300_000_000,
       { AddMessage: text },
-      { handle_input: 'Action', types: REGISTRY_TYPES },
+      { handle_input: "Action", types: REGISTRY_TYPES },
       currentAccount!,
       alert,
       () => {
         setRefreshPage(!refreshPage);
-      },
+      }
     );
   };
 
