@@ -7,13 +7,14 @@ import { useUser } from "../../context/UserContext";
 import { CONTRACT_ADDRESS, REGISTRY_TYPES } from "../../config";
 import { sendMessageToProgram } from "../../service/SendMessage";
 import { MessageList } from "./MessageList/MessageList";
+import { Message } from '../../types/message'
 
 export const Guestbook = () => {
   const alert = useAlert();
   const { api } = useApi();
   const { currentAccount } = useUser();
 
-  const [messages, setMessages] = useState<any>([]);
+  const [messages, setMessages] = useState<Array<Message>>([]);
   const [refreshPage, setRefreshPage] = useState(false);
 
   const readState = useCallback(async () => {
@@ -21,12 +22,12 @@ export const Guestbook = () => {
     // TODO: add type
     const buffer = await import("../../out/guestbook.meta.wasm");
     const state = await api.programState.read(CONTRACT_ADDRESS, buffer.default);
-    setMessages(state.toHuman());
+    setMessages(state.toHuman() as Message[]);
   }, [api.programState]);
 
   useEffect(() => {
     readState();
-  }, [readState]);
+  }, [readState, refreshPage]);
 
   const handleSubmit = (event: React.MouseEvent<HTMLElement>, text: string) => {
     // Example of sending a message to the program

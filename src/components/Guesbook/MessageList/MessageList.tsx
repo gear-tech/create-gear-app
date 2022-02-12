@@ -1,17 +1,12 @@
 import React from 'react';
 import Identicon from '@polkadot/react-identicon';
 import { toShortAddress } from '../../../utils';
+import { Message } from '../../../types/message';
 
 import './MessageList.scss';
 
 type Props = {
   messages: Message[];
-};
-
-type Message = {
-  autor: string;
-  text: string;
-  timestamp: string;
 };
 
 export const MessageList = ({ messages }: Props) => {
@@ -31,9 +26,5 @@ export const MessageList = ({ messages }: Props) => {
     </div>
   ));
 
-  return (
-    <div className="messages-list">
-      {messagesItem.reverse()}
-    </div>
-  );
+  return <div className="messages-list">{messagesItem.reverse()}</div>;
 };
