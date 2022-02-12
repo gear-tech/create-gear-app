@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.4.3",
     "@gear-js/api": "^0.11.3",
     "@polkadot/api": "^7.6.1",
     "@polkadot/extension-dapp": "^0.42.7",
@@ -27,12 +28,12 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "craco start",
+    "build": "craco build",
     "build:contract": "node contract/buildwasm.js",
     "build:types": "node contract/parseTypes.js",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "test": "craco test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -57,9 +58,8 @@
   "devDependencies": {
     "@types/react-alert": "^5.2.1",
     "@wasm-tool/wasm-pack-plugin": "^1.6.0",
+    "arraybuffer-loader": "^1.0.8",
     "buffer": "^6.0.3",
-    "react-app-rewired": "^2.1.8",
-    "wasm-loader": "^1.3.0",
     "sass": "^1.34.0"
   },
   "browser": {
