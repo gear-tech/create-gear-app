@@ -26,13 +26,9 @@ export const useUser = () => {
   return useContext(UserContext);
 };
 
-export const UserProvider = ({ children }: any) => {
-  const [currentAccount, setCurrentAccount] = useState<UserAccount | null>(
-    null,
-  );
-  const [injectedAccounts, setInjectedAccounts] = useState<
-    UserAccount[] | null
-  >(null);
+export const UserProvider: React.FC  = ({ children }) => {
+  const [currentAccount, setCurrentAccount] = useState<UserAccount | null>(null);
+  const [injectedAccounts, setInjectedAccounts] = useState<UserAccount[] | null>(null);
   const [accountBalance, setAccountBalance] = useState<string | null>(null);
 
   const { api } = useApi();
@@ -90,6 +86,7 @@ export const UserProvider = ({ children }: any) => {
     setTimeout(() => {
       fetchAccounts()
         .then((allAccounts) => {
+
           if (allAccounts) {
             allAccounts.forEach((account: UserAccount) => {
               if (account.address === localStorage.getItem('savedAccount')) {

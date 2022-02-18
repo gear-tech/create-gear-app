@@ -2,17 +2,22 @@ import React, { FC } from 'react';
 import Identicon from '@polkadot/react-identicon';
 import clsx from 'clsx';
 import { UserAccount } from '../../types/user';
+import { useModal } from '../../context/ModalContext';
 import { toShortAddress } from '../../utils';
 
 import './AccountList.scss';
 
 type Props = {
   list: Array<UserAccount>;
-  toggleAccount: (event: any, index: number) => void;
-  handleClose: () => void;
+  toggleAccount: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    index: number,
+  ) => void;
 };
 
-export const AccountList: FC<Props> = ({ list, toggleAccount, handleClose }: Props) => {
+export const AccountList: FC<Props> = ({ list, toggleAccount }: Props) => {
+  const { closeModal } = useModal();
+
   const accountItem = list.map((account: UserAccount, index: number) => (
     <button
       type="button"
@@ -20,14 +25,16 @@ export const AccountList: FC<Props> = ({ list, toggleAccount, handleClose }: Pro
       key={account.address}
       onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
         toggleAccount(event, index);
-        handleClose();
+        closeModal();
       }}
     >
       <span className="account-list__icon">
         <Identicon value={account.address} size={25} theme="polkadot" />
       </span>
       <span className="account-list__name">{account.meta.name}</span>
-      <span className="account-list__address">{toShortAddress(account.address)}</span>
+      <span className="account-list__address">
+        {toShortAddress(account.address)}
+      </span>
     </button>
   ));
 
@@ -35,8 +42,8 @@ export const AccountList: FC<Props> = ({ list, toggleAccount, handleClose }: Pro
     <div className="account-list__wrapper">
       {(list.length > 0 && accountItem) || (
         <p>
-          No accounts found. Please open your Polkadot extension and create a new account or import existing. Then
-          reload this page.
+          No accounts found. Please open your Polkadot extension and create a
+          new account or import existing. Then reload this page.
         </p>
       )}
     </div>

@@ -1,28 +1,29 @@
 import React from 'react';
 
+import { useModal } from '../../context/ModalContext';
+
 import './Modal.scss';
 import { ReactComponent as CloseSVG } from '../../images/close.svg';
 
-type Props = {
-  content: any;
+type ModalConfig = {
   title?: string;
-  handleClose: () => void;
+  content: any;
 };
 
-export const Modal = ({ content, handleClose, ...props }: Props) => (
-  <div className="modal__wrapper">
-    <div className="modal__box">
-      <button className="modal__close" onClick={handleClose} type="button">
-        <span className="modal__close-x">
-          <CloseSVG />
-        </span>
-      </button>
-      {props.title && <h2 className="modal__title">{props.title}</h2>}
-      <div className="modal__content">{content}</div>
-    </div>
-  </div>
-);
+export const Modal = ({ content, title }: ModalConfig) => {
+  const { closeModal } = useModal();
 
-Modal.defaultProps = {
-  title: false,
+  return (
+    <div className="modal__wrapper">
+      <div className="modal__box">
+        <button className="modal__close" type="button" onClick={closeModal}>
+          <span className="modal__close-x">
+            <CloseSVG />
+          </span>
+        </button>
+        {title && <h2 className="modal__title">{title}</h2>}
+        <div className="modal__content">{content}</div>
+      </div>
+    </div>
+  );
 };
