@@ -13,8 +13,6 @@ export const Wallet = () => {
   const { openModal } = useModal();
   const { selectAccount, injectedAccounts } = useUser();
 
-  console.log(injectedAccounts);
-
   const handleLogout = () => {
     setCurrentAccount(null);
     localStorage.removeItem('savedAccount');
