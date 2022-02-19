@@ -6,7 +6,6 @@ import { ApiPromiseProvider } from './context/ApiPromiseContext';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import { AlertTemplate } from './components/AlertTemplate';
 import { UserProvider } from './context/UserContext';
-import { ModalProvider } from './context/ModalContext';
 
 const options = {
   position: positions.BOTTOM_CENTER,
@@ -20,12 +19,10 @@ ReactDOM.render(
     <ApiPromiseProvider>
       <UserProvider>
         <AlertProvider template={AlertTemplate} {...options}>
-          <ModalProvider>
-            <App />
-          </ModalProvider>
+          <App />
         </AlertProvider>
       </UserProvider>
     </ApiPromiseProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
