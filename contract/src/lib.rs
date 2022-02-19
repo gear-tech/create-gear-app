@@ -54,11 +54,6 @@ impl State {
 // 3️⃣ The state itself (i.e. the variable state will be accessed through)
 static mut STATE: State = State::new();
 
-// 4️⃣ Init function that is executed once upon contract initialization
-// Here is empty
-#[no_mangle]
-pub unsafe extern "C" fn init() {}
-
 // 5️⃣ Handle function that processes the incoming message
 #[no_mangle]
 pub unsafe extern "C" fn handle() {
