@@ -4,7 +4,7 @@ import { Form } from './Form/Form';
 import { useAlert } from 'react-alert';
 import { useApi } from 'hooks/useApi';
 import { useUser } from '../../context/UserContext';
-import { CONTRACT_ADDRESS, REGISTRY_TYPES } from '../../config';
+import { CONTRACT_ADDRESS, REGISTRY_TYPES } from 'const';
 import { sendMessageToProgram } from '../../service/SendMessage';
 import { MessageList } from './MessageList/MessageList';
 import { Message } from '../../types/message';
