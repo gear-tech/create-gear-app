@@ -60,7 +60,6 @@
     "@wasm-tool/wasm-pack-plugin": "^1.6.0",
     "arraybuffer-loader": "^1.0.8",
     "buffer": "^6.0.3",
-    "eslint-config-react-app": "^7.0.0",
     "sass": "^1.34.0"
   },
   "browser": {
