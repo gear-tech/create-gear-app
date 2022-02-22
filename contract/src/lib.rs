@@ -3,10 +3,10 @@
 // 1️⃣ External packages (crates) and internal modules import
 use codec::{Decode, Encode};
 use gstd::{
+    debug, exec, msg,
+    prelude::*,
     ActorId,
-    msg, 
-    exec, 
-    prelude::{String, Vec}, debug};
+};
 use scale_info::TypeInfo;
 
 // 2️⃣ This defines the meta information about the contract
@@ -17,7 +17,7 @@ gstd::metadata! {
     handle:
         input: Action,
     state:
-        output: Vec<Message>,    
+        output: Vec<Message>,
 }
 
 #[derive(Debug, TypeInfo, Decode)]
@@ -45,10 +45,8 @@ impl State {
     }
 
     pub fn add_message(&mut self, message: Message) {
-        self.messages
-            .push(message);
+        self.messages.push(message);
     }
-
 }
 
 // 3️⃣ The state itself (i.e. the variable state will be accessed through)
@@ -63,11 +61,10 @@ pub unsafe extern "C" fn handle() {
 
     match action {
         Action::AddMessage(text) => {
-        
             let message = Message {
                 autor: msg::source(),
                 text: text,
-                timestamp: exec::block_height()
+                timestamp: exec::block_height(),
             };
 
             STATE.add_message(message.clone());
@@ -75,16 +72,13 @@ pub unsafe extern "C" fn handle() {
             msg::reply((), 0, 0);
 
             debug!("Added new post: {:?}", message);
-
         }
     }
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn meta_state() -> *mut [i32; 2] {
-    let messages: Vec<Message> = STATE
-        .messages
-        .clone();
+    let messages: Vec<Message> = STATE.messages.clone();
     let encoded = messages.encode();
     let result = gstd::macros::util::to_wasm_ptr(&encoded[..]);
     core::mem::forget(encoded);

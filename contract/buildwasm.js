@@ -12,7 +12,7 @@ const debug = process.argv.pop() === '--debug';
 // check out if we have 'debug' flag in options
 const buildCmd = debug
   ? 'cargo +nightly build'
-  : 'cargo +nightly build --release --all-features';
+  : 'cargo +nightly build --release --target wasm32-unknown-unknown';
 
 // Run cargo build command and save exit code
 const { code } = sh.exec(buildCmd);

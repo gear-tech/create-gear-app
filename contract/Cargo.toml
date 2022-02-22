@@ -5,6 +5,8 @@ authors = ["Gear Technologies"]
 edition = "2018"
 license = "GPL-3.0"
 
+resolver = "2"
+
 [lib]
 crate-type = ["cdylib"]
 
@@ -18,3 +20,6 @@ primitive-types = { version = "0.10.1", default-features = false, features = ["s
 [profile.release]
 lto = true
 opt-level = 's'
+
+[dev-dependencies]
+gtest = { git = "https://github.com/gear-tech/gear.git"}
