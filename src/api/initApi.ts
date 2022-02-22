@@ -26,6 +26,8 @@ class NodeApi {
     this._api = await GearApi.create({
       providerAddress: this.address,
     });
+
+    return this._api;
   }
 
   public subscribeBalanceChange(address: string, cb: (event: Balance) => void) {

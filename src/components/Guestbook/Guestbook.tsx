@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Welcome } from "./Welcome/Welcome";
-import { Form } from "./Form/Form";
-import { useAlert } from "react-alert";
-import { useApi } from "../../context/ApiPromiseContext";
-import { useUser } from "../../context/UserContext";
-import { CONTRACT_ADDRESS, REGISTRY_TYPES } from "../../config";
-import { sendMessageToProgram } from "../../service/SendMessage";
-import { MessageList } from "./MessageList/MessageList";
-import { Message } from '../../types/message'
+import React, { useCallback, useEffect, useState } from 'react';
+import { Welcome } from './Welcome/Welcome';
+import { Form } from './Form/Form';
+import { useAlert } from 'react-alert';
+import { useApi } from 'hooks/useApi';
+import { useUser } from '../../context/UserContext';
+import { CONTRACT_ADDRESS, REGISTRY_TYPES } from '../../config';
+import { sendMessageToProgram } from '../../service/SendMessage';
+import { MessageList } from './MessageList/MessageList';
+import { Message } from '../../types/message';
 
 export const Guestbook = () => {
   const alert = useAlert();
@@ -20,7 +20,7 @@ export const Guestbook = () => {
   const readState = useCallback(async () => {
     // @ts-ignore
     // TODO: add type
-    const buffer = await import("../../out/guestbook.meta.wasm");
+    const buffer = await import('../../out/guestbook.meta.wasm');
     const state = await api.programState.read(CONTRACT_ADDRESS, buffer.default);
     setMessages(state.toHuman() as Message[]);
   }, [api.programState]);
@@ -38,7 +38,7 @@ export const Guestbook = () => {
       CONTRACT_ADDRESS,
       300_000_000,
       { AddMessage: text },
-      { handle_input: "Action", types: REGISTRY_TYPES },
+      { handle_input: 'Action', types: REGISTRY_TYPES },
       currentAccount!,
       alert,
       () => {
