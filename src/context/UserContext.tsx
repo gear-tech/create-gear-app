@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { InjectedExtension } from '@polkadot/extension-inject/types';
 
 import { UserAccount } from '../types/user';
-import { useApi } from './ApiPromiseContext';
+import { useApi } from 'hooks/useApi';
 import { nodeApi } from '../api/initApi';
 
 type InitContextProps = {
@@ -16,7 +16,7 @@ type InitContextProps = {
   accountBalance: string | null;
   selectAccount: (
     event: React.MouseEvent<HTMLButtonElement>,
-    index: number,
+    index: number
   ) => void;
 };
 
@@ -28,7 +28,7 @@ export const useUser = () => {
 
 export const UserProvider = ({ children }: any) => {
   const [currentAccount, setCurrentAccount] = useState<UserAccount | null>(
-    null,
+    null
   );
   const [injectedAccounts, setInjectedAccounts] = useState<
     UserAccount[] | null
@@ -63,7 +63,7 @@ export const UserProvider = ({ children }: any) => {
 
   const selectAccount = (
     event: React.MouseEvent<HTMLButtonElement>,
-    index: number,
+    index: number
   ) => {
     event.stopPropagation();
     if (injectedAccounts) {
@@ -109,7 +109,7 @@ export const UserProvider = ({ children }: any) => {
       const freeBalance = await api.balance.findOut(ADDR);
       return freeBalance;
     },
-    [api],
+    [api]
   );
 
   // Get account balance

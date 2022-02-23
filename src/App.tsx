@@ -1,10 +1,9 @@
 import React from 'react';
-import { useApi } from './context/ApiPromiseContext';
+import { useApi } from 'hooks/useApi';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { Loader } from './components/Loader/Loader';
 import { Wallet } from './components/Wallet/Wallet';
-import { Guestbook } from './components/Guesbook/Guesbook'
-
+import { Guestbook } from './components/Guestbook/Guestbook';
 import './App.css';
 
 function App() {
@@ -12,7 +11,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      {(!isApiReady && <Loader />) || (
+      {isApiReady ? (
         <>
           <section className="header-section">
             <div className="container">
@@ -29,6 +28,8 @@ function App() {
             </div>
           </div>
         </>
+      ) : (
+        <Loader />
       )}
     </div>
   );

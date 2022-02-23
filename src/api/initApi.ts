@@ -1,7 +1,7 @@
 import { GearApi } from '@gear-js/api';
 import { Balance } from '@polkadot/types/interfaces';
 import { UnsubscribePromise } from '@polkadot/api/types';
-import { REACT_APP_NETWORK } from '../config';
+import { REACT_APP_NETWORK } from 'const';
 
 class NodeApi {
   get api(): GearApi | null {
@@ -26,6 +26,8 @@ class NodeApi {
     this._api = await GearApi.create({
       providerAddress: this.address,
     });
+
+    return this._api;
   }
 
   public subscribeBalanceChange(address: string, cb: (event: Balance) => void) {
