@@ -69,7 +69,7 @@ pub unsafe extern "C" fn handle() {
 
             STATE.add_message(message.clone());
 
-            msg::reply((), 0, 0);
+            msg::reply((), 0);
 
             debug!("Added new post: {:?}", message);
         }
