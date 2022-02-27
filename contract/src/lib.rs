@@ -80,8 +80,6 @@ pub unsafe extern "C" fn handle() {
 pub unsafe extern "C" fn meta_state() -> *mut [i32; 2] {
     let messages: Vec<Message> = STATE.messages.clone();
     let encoded = messages.encode();
-    let result = gstd::macros::util::to_wasm_ptr(&encoded[..]);
-    core::mem::forget(encoded);
-
-    result
+    
+    gstd::util::to_leak_ptr(encoded)
 }
