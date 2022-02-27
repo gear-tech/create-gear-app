@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.3",
-    "@gear-js/api": "^0.14.0",
-    "@polkadot/api": "^7.6.1",
+    "@gear-js/api": "^0.14.2",
+    "@polkadot/api": "^7.10.1",
     "@polkadot/extension-dapp": "^0.42.7",
     "@polkadot/react-identicon": "^1.0.1",
     "@testing-library/jest-dom": "^5.14.1",

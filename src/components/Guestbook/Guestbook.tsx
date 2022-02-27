@@ -22,6 +22,7 @@ export const Guestbook = () => {
     // TODO: add type
     const buffer = await import('../../out/guestbook.meta.wasm');
     const state = await api.programState.read(CONTRACT_ADDRESS, buffer.default);
+
     setMessages(state.toHuman() as Message[]);
   }, [api.programState]);
 
