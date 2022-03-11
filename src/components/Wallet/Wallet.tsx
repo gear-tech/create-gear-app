@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import Identicon from '@polkadot/react-identicon';
-import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import { ReactComponent as Logout } from 'images/logout.svg';
 import { Modal } from 'components/Modal/Modal';
+import { LOCAL_STORAGE } from 'consts';
 import { useAccount } from 'hooks';
 import { useAccounts, useBalance } from './hooks';
+import { isLoggedIn } from './utils';
 import { Accounts, NoExtension } from './children';
 import './Wallet.scss';
 
@@ -13,9 +14,6 @@ const Wallet = () => {
   const accounts = useAccounts();
   const balance = useBalance();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const isLoggedIn = ({ address }: InjectedAccountWithMeta) =>
-    localStorage.getItem('account') === address;
 
   useEffect(() => {
     if (accounts) setAccount(accounts.find(isLoggedIn));
@@ -31,7 +29,7 @@ const Wallet = () => {
 
   const handleLogout = () => {
     setAccount(undefined);
-    localStorage.removeItem('account');
+    localStorage.removeItem(LOCAL_STORAGE.ACCOUNT);
   };
 
   return (

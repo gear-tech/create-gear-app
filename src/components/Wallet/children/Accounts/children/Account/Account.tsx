@@ -1,8 +1,10 @@
 import Identicon from '@polkadot/react-identicon';
 import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import clsx from 'clsx';
+import { LOCAL_STORAGE } from 'consts';
 import { useAccount } from 'hooks';
 import { toShortAddress } from 'utils';
+import { isLoggedIn } from '../../../../utils';
 import './Account.scss';
 
 type Props = {
@@ -13,20 +15,20 @@ type Props = {
 const Account = ({ account, closeModal }: Props) => {
   const { address, meta } = account;
   const { setAccount } = useAccount();
-  const isActive = localStorage.getItem('account') === address;
+  const className = clsx('account-list__item', isLoggedIn(account) && 'active');
+
+  const switchAccount = () => {
+    setAccount(account);
+    localStorage.setItem(LOCAL_STORAGE.ACCOUNT, address);
+  };
 
   const handleClick = () => {
-    setAccount(account);
-    localStorage.setItem('account', address);
+    switchAccount();
     closeModal();
   };
 
   return (
-    <button
-      type="button"
-      className={clsx('account-list__item', isActive && 'active')}
-      onClick={handleClick}
-    >
+    <button type="button" className={className} onClick={handleClick}>
       <span className="account-list__icon">
         <Identicon value={address} size={25} theme="polkadot" />
       </span>

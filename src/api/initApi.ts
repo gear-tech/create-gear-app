@@ -1,7 +1,7 @@
 import { GearApi } from '@gear-js/api';
 import { Balance } from '@polkadot/types/interfaces';
 import { UnsubscribePromise } from '@polkadot/api/types';
-import { REACT_APP_NETWORK } from 'const';
+import { REACT_APP_NETWORK } from 'consts';
 
 class NodeApi {
   get api(): GearApi | null {

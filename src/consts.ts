@@ -3,3 +3,7 @@ export const CONTRACT_ADDRESS =
 export const REGISTRY_TYPES = process.env.REACT_APP_REGISTRY_TYPES || '';
 export const REACT_APP_NETWORK =
   process.env.REACT_APP_NETWORK || 'ws://localhost:9944';
+
+export enum LOCAL_STORAGE {
+  ACCOUNT = 'account',
+}
