@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
 import Identicon from '@polkadot/react-identicon';
 import clsx from 'clsx';
 import { UserAccount } from 'types/user';
 import { toShortAddress } from 'utils';
-import './AccountList.scss';
+import './Accounts.scss';
 
 type Props = {
   list: Array<UserAccount>;
@@ -11,11 +10,7 @@ type Props = {
   handleClose: () => void;
 };
 
-export const AccountList: FC<Props> = ({
-  list,
-  toggleAccount,
-  handleClose,
-}: Props) => {
+const Accounts = ({ list, toggleAccount, handleClose }: Props) => {
   const accountItem = list.map((account: UserAccount, index: number) => (
     <button
       type="button"
@@ -47,3 +42,5 @@ export const AccountList: FC<Props> = ({
     </div>
   );
 };
+
+export { Accounts };

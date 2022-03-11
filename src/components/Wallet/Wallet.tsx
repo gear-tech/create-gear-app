@@ -3,7 +3,7 @@ import Identicon from '@polkadot/react-identicon';
 import { ReactComponent as Logout } from '../../images/logout.svg';
 import { useUser } from '../../context/UserContext';
 import { Modal } from '../Modal/Modal';
-import { AccountList } from './children/AccountList/AccountList';
+import { Accounts } from './children/Accounts/Accounts';
 import './Wallet.scss';
 
 export const Wallet = () => {
@@ -33,7 +33,7 @@ export const Wallet = () => {
   return (
     <>
       <div className="user-wallet__wrapper">
-        {(currentAccount && (
+        {currentAccount ? (
           <>
             <div className="user-wallet__balance">{accountBalance}</div>
             <button
@@ -59,7 +59,7 @@ export const Wallet = () => {
               <Logout />
             </button>
           </>
-        )) || (
+        ) : (
           <button
             className="user-wallet__connect-button"
             type="button"
@@ -72,7 +72,7 @@ export const Wallet = () => {
       {isModalOpen && (
         <Modal caption="Connect" close={closeModal}>
           {injectedAccounts ? (
-            <AccountList
+            <Accounts
               list={injectedAccounts}
               toggleAccount={selectAccount}
               handleClose={closeModal}
