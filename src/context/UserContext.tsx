@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { InjectedExtension } from '@polkadot/extension-inject/types';
 
 import { UserAccount } from '../types/user';
-import { useApi } from 'hooks/useApi';
+import { useApi } from 'hooks';
 import { nodeApi } from '../api/initApi';
 
 type InitContextProps = {

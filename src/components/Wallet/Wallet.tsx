@@ -3,13 +3,14 @@ import Identicon from '@polkadot/react-identicon';
 import { ReactComponent as Logout } from '../../images/logout.svg';
 import { useUser } from '../../context/UserContext';
 import { Modal } from '../Modal/Modal';
-import { useAccounts } from './hooks';
+import { useAccounts, useBalance } from './hooks';
 import { Accounts, NoExtension } from './children';
 import './Wallet.scss';
 
 const Wallet = () => {
   const accounts = useAccounts();
-  const { currentAccount, setCurrentAccount, accountBalance } = useUser();
+  const balance = useBalance();
+  const { currentAccount, setCurrentAccount } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -30,7 +31,7 @@ const Wallet = () => {
       <div className="user-wallet__wrapper">
         {currentAccount ? (
           <>
-            <div className="user-wallet__balance">{accountBalance}</div>
+            <div className="user-wallet__balance">{balance}</div>
             <button
               type="button"
               className="user-wallet__user-info"

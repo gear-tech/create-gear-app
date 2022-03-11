@@ -11,8 +11,8 @@ const Accounts = ({ list, closeModal }: Props) => {
   const isAnyAccount = list.length > 0;
 
   const getAccounts = () =>
-    list.map((account) => (
-      <Account account={account} closeModal={closeModal} />
+    list.map((account, index) => (
+      <Account key={index} account={account} closeModal={closeModal} />
     ));
 
   return (

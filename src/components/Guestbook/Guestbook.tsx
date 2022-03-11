@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Welcome } from './Welcome/Welcome';
 import { Form } from './Form/Form';
 import { useAlert } from 'react-alert';
-import { useApi } from 'hooks/useApi';
+import { useApi } from 'hooks';
 import { useUser } from '../../context/UserContext';
 import { CONTRACT_ADDRESS, REGISTRY_TYPES } from 'const';
 import { sendMessageToProgram } from '../../service/SendMessage';
@@ -22,7 +22,7 @@ export const Guestbook = () => {
     // TODO: add type
     const buffer = await import('../../out/guestbook.meta.wasm');
     const state = await api.programState.read(CONTRACT_ADDRESS, buffer.default);
-    console.log(state.toHuman())
+    console.log(state.toHuman());
     setMessages(state.toHuman() as Message[]);
   }, [api.programState]);
 
