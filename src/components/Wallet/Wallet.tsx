@@ -11,7 +11,6 @@ export const Wallet = () => {
     currentAccount,
     setCurrentAccount,
     accountBalance,
-    selectAccount,
     injectedAccounts,
   } = useUser();
 
@@ -72,11 +71,7 @@ export const Wallet = () => {
       {isModalOpen && (
         <Modal caption="Connect" close={closeModal}>
           {injectedAccounts ? (
-            <Accounts
-              list={injectedAccounts}
-              toggleAccount={selectAccount}
-              handleClose={closeModal}
-            />
+            <Accounts list={injectedAccounts} closeModal={closeModal} />
           ) : (
             <div className="user-wallet__msg">
               Polkadot extension was not found or disabled. Please{' '}

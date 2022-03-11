@@ -1,44 +1,23 @@
-import Identicon from '@polkadot/react-identicon';
-import clsx from 'clsx';
 import { UserAccount } from 'types/user';
-import { toShortAddress } from 'utils';
+import { Account, Empty } from './children';
 import './Accounts.scss';
 
 type Props = {
-  list: Array<UserAccount>;
-  toggleAccount: (event: any, index: number) => void;
-  handleClose: () => void;
+  list: UserAccount[];
+  closeModal: () => void;
 };
 
-const Accounts = ({ list, toggleAccount, handleClose }: Props) => {
-  const accountItem = list.map((account: UserAccount, index: number) => (
-    <button
-      type="button"
-      className={clsx('account-list__item', account.isActive && 'active')}
-      key={account.address}
-      onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-        toggleAccount(event, index);
-        handleClose();
-      }}
-    >
-      <span className="account-list__icon">
-        <Identicon value={account.address} size={25} theme="polkadot" />
-      </span>
-      <span className="account-list__name">{account.meta.name}</span>
-      <span className="account-list__address">
-        {toShortAddress(account.address)}
-      </span>
-    </button>
-  ));
+const Accounts = ({ list, closeModal }: Props) => {
+  const isAnyAccount = list.length > 0;
+
+  const getAccounts = () =>
+    list.map((account) => (
+      <Account account={account} closeModal={closeModal} />
+    ));
 
   return (
     <div className="account-list__wrapper">
-      {(list.length > 0 && accountItem) || (
-        <p>
-          No accounts found. Please open your Polkadot extension and create a
-          new account or import existing. Then reload this page.
-        </p>
-      )}
+      {isAnyAccount ? getAccounts() : <Empty />}
     </div>
   );
 };
