@@ -3,7 +3,7 @@ import Identicon from '@polkadot/react-identicon';
 import { ReactComponent as Logout } from '../../images/logout.svg';
 import { useUser } from '../../context/UserContext';
 import { Modal } from '../Modal/Modal';
-import { Accounts } from './children/Accounts/Accounts';
+import { Accounts, NoExtension } from './children';
 import './Wallet.scss';
 
 export const Wallet = () => {
@@ -73,17 +73,7 @@ export const Wallet = () => {
           {injectedAccounts ? (
             <Accounts list={injectedAccounts} closeModal={closeModal} />
           ) : (
-            <div className="user-wallet__msg">
-              Polkadot extension was not found or disabled. Please{' '}
-              <a
-                className="user-wallet__msg-link"
-                href="https://polkadot.js.org/extension/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                install it
-              </a>
-            </div>
+            <NoExtension />
           )}
         </Modal>
       )}
