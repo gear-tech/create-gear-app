@@ -1,33 +1,37 @@
 import Identicon from '@polkadot/react-identicon';
+import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import clsx from 'clsx';
-import { UserAccount } from 'types/user';
+import { useAccount } from 'hooks';
 import { toShortAddress } from 'utils';
 import './Account.scss';
 
 type Props = {
-  account: UserAccount;
+  account: InjectedAccountWithMeta;
   closeModal: () => void;
 };
 
 const Account = ({ account, closeModal }: Props) => {
+  const { address, meta } = account;
+  const { setAccount } = useAccount();
+  const isActive = localStorage.getItem('account') === address;
+
   const handleClick = () => {
-    // selectAccount(event, index);
+    setAccount(account);
+    localStorage.setItem('account', address);
     closeModal();
   };
 
   return (
     <button
       type="button"
-      className={clsx('account-list__item', account.isActive && 'active')}
+      className={clsx('account-list__item', isActive && 'active')}
       onClick={handleClick}
     >
       <span className="account-list__icon">
-        <Identicon value={account.address} size={25} theme="polkadot" />
+        <Identicon value={address} size={25} theme="polkadot" />
       </span>
-      <span className="account-list__name">{account.meta.name}</span>
-      <span className="account-list__address">
-        {toShortAddress(account.address)}
-      </span>
+      <span className="account-list__name">{meta.name}</span>
+      <span className="account-list__address">{toShortAddress(address)}</span>
     </button>
   );
 };

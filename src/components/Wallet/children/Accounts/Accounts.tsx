@@ -1,17 +1,17 @@
-import { UserAccount } from 'types/user';
+import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import { Account, Empty } from './children';
 import './Accounts.scss';
 
 type Props = {
-  list: UserAccount[];
+  accounts: InjectedAccountWithMeta[];
   closeModal: () => void;
 };
 
-const Accounts = ({ list, closeModal }: Props) => {
-  const isAnyAccount = list.length > 0;
+const Accounts = ({ accounts, closeModal }: Props) => {
+  const isAnyAccount = accounts.length > 0;
 
   const getAccounts = () =>
-    list.map((account, index) => (
+    accounts.map((account, index) => (
       <Account key={index} account={account} closeModal={closeModal} />
     ));
 

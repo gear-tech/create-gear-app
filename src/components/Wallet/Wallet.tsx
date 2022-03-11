@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Identicon from '@polkadot/react-identicon';
-import { ReactComponent as Logout } from '../../images/logout.svg';
-import { useUser } from '../../context/UserContext';
-import { Modal } from '../Modal/Modal';
+import { ReactComponent as Logout } from 'images/logout.svg';
+import { Modal } from 'components/Modal/Modal';
+import { useAccount } from 'hooks';
 import { useAccounts, useBalance } from './hooks';
 import { Accounts, NoExtension } from './children';
 import './Wallet.scss';
@@ -10,7 +10,7 @@ import './Wallet.scss';
 const Wallet = () => {
   const accounts = useAccounts();
   const balance = useBalance();
-  const { currentAccount, setCurrentAccount } = useUser();
+  const { account, setAccount } = useAccount();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -22,14 +22,14 @@ const Wallet = () => {
   };
 
   const handleLogout = () => {
-    setCurrentAccount(null);
-    localStorage.removeItem('savedAccount');
+    setAccount(undefined);
+    localStorage.removeItem('account');
   };
 
   return (
     <>
       <div className="user-wallet__wrapper">
-        {currentAccount ? (
+        {account ? (
           <>
             <div className="user-wallet__balance">{balance}</div>
             <button
@@ -37,14 +37,8 @@ const Wallet = () => {
               className="user-wallet__user-info"
               onClick={openModal}
             >
-              <Identicon
-                value={currentAccount.address}
-                size={25}
-                theme="polkadot"
-              />
-              <span className="user-wallet__name">
-                {currentAccount.meta.name}
-              </span>
+              <Identicon value={account.address} size={25} theme="polkadot" />
+              <span className="user-wallet__name">{account.meta.name}</span>
             </button>
             <button
               type="button"
@@ -68,7 +62,7 @@ const Wallet = () => {
       {isModalOpen && (
         <Modal caption="Connect" close={closeModal}>
           {accounts ? (
-            <Accounts list={accounts} closeModal={closeModal} />
+            <Accounts accounts={accounts} closeModal={closeModal} />
           ) : (
             <NoExtension />
           )}

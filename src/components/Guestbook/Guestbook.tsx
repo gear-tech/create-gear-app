@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Welcome } from './Welcome/Welcome';
 import { Form } from './Form/Form';
 import { useAlert } from 'react-alert';
-import { useApi } from 'hooks';
-import { useUser } from '../../context/UserContext';
+import { useApi, useAccount } from 'hooks';
 import { CONTRACT_ADDRESS, REGISTRY_TYPES } from 'const';
 import { sendMessageToProgram } from '../../service/SendMessage';
 import { MessageList } from './MessageList/MessageList';
@@ -12,7 +11,7 @@ import { Message } from '../../types/message';
 export const Guestbook = () => {
   const alert = useAlert();
   const { api } = useApi();
-  const { currentAccount } = useUser();
+  const { account } = useAccount();
 
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [refreshPage, setRefreshPage] = useState(false);
@@ -40,7 +39,7 @@ export const Guestbook = () => {
       300_000_000,
       { AddMessage: text },
       { handle_input: 'Action', types: REGISTRY_TYPES },
-      currentAccount!,
+      account!,
       alert,
       () => {
         setRefreshPage(!refreshPage);
