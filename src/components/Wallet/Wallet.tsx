@@ -3,7 +3,7 @@ import Identicon from '@polkadot/react-identicon';
 import { ReactComponent as Logout } from '../../images/logout.svg';
 import { useUser } from '../../context/UserContext';
 import { Modal } from '../Modal/Modal';
-import { AccountList } from '../AccountList/AccountList';
+import { AccountList } from './children/AccountList/AccountList';
 import './Wallet.scss';
 
 export const Wallet = () => {

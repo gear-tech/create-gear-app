@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import Identicon from '@polkadot/react-identicon';
 import clsx from 'clsx';
-import { UserAccount } from '../../types/user';
-import { toShortAddress } from '../../utils';
-
+import { UserAccount } from 'types/user';
+import { toShortAddress } from 'utils';
 import './AccountList.scss';
 
 type Props = {
@@ -12,7 +11,11 @@ type Props = {
   handleClose: () => void;
 };
 
-export const AccountList: FC<Props> = ({ list, toggleAccount, handleClose }: Props) => {
+export const AccountList: FC<Props> = ({
+  list,
+  toggleAccount,
+  handleClose,
+}: Props) => {
   const accountItem = list.map((account: UserAccount, index: number) => (
     <button
       type="button"
@@ -27,7 +30,9 @@ export const AccountList: FC<Props> = ({ list, toggleAccount, handleClose }: Pro
         <Identicon value={account.address} size={25} theme="polkadot" />
       </span>
       <span className="account-list__name">{account.meta.name}</span>
-      <span className="account-list__address">{toShortAddress(account.address)}</span>
+      <span className="account-list__address">
+        {toShortAddress(account.address)}
+      </span>
     </button>
   ));
 
@@ -35,8 +40,8 @@ export const AccountList: FC<Props> = ({ list, toggleAccount, handleClose }: Pro
     <div className="account-list__wrapper">
       {(list.length > 0 && accountItem) || (
         <p>
-          No accounts found. Please open your Polkadot extension and create a new account or import existing. Then
-          reload this page.
+          No accounts found. Please open your Polkadot extension and create a
+          new account or import existing. Then reload this page.
         </p>
       )}
     </div>
