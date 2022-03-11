@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Identicon from '@polkadot/react-identicon';
 import { ReactComponent as Logout } from '../../images/logout.svg';
 import { useUser } from '../../context/UserContext';
 import { Modal } from '../Modal/Modal';
+import { useAccounts } from './hooks';
 import { Accounts, NoExtension } from './children';
 import './Wallet.scss';
 
-export const Wallet = () => {
-  const {
-    currentAccount,
-    setCurrentAccount,
-    accountBalance,
-    injectedAccounts,
-  } = useUser();
-
+const Wallet = () => {
+  const accounts = useAccounts();
+  const { currentAccount, setCurrentAccount, accountBalance } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -70,8 +66,8 @@ export const Wallet = () => {
       </div>
       {isModalOpen && (
         <Modal caption="Connect" close={closeModal}>
-          {injectedAccounts ? (
-            <Accounts list={injectedAccounts} closeModal={closeModal} />
+          {accounts ? (
+            <Accounts list={accounts} closeModal={closeModal} />
           ) : (
             <NoExtension />
           )}
@@ -80,3 +76,5 @@ export const Wallet = () => {
     </>
   );
 };
+
+export { Wallet };
