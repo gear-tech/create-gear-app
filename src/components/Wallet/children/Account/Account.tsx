@@ -3,14 +3,14 @@ import { ReactComponent as Logout } from 'images/logout.svg';
 import { LOCAL_STORAGE } from 'consts';
 import { useAccount } from 'hooks';
 import { useBalance } from './hooks';
-import './Summary.scss';
+import './Account.scss';
 
 type Props = {
   openModal: () => void;
   closeModal: () => void;
 };
 
-const Summary = ({ openModal, closeModal }: Props) => {
+const Account = ({ openModal, closeModal }: Props) => {
   const { account, setAccount } = useAccount();
   const balance = useBalance();
 
@@ -59,4 +59,4 @@ const Summary = ({ openModal, closeModal }: Props) => {
   );
 };
 
-export { Summary };
+export { Account };

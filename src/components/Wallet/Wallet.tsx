@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Modal } from 'components/Modal/Modal';
 import { useAccount } from 'hooks';
 import { useAccounts } from './hooks';
 import { isLoggedIn } from './utils';
-import { Accounts, NoExtension, Summary } from './children';
+import { Account, AccountsModal } from './children';
 
 const Wallet = () => {
   const { setAccount } = useAccount();
@@ -24,15 +23,9 @@ const Wallet = () => {
 
   return (
     <>
-      <Summary openModal={openModal} closeModal={closeModal} />
+      <Account openModal={openModal} closeModal={closeModal} />
       {isModalOpen && (
-        <Modal caption="Connect" close={closeModal}>
-          {accounts ? (
-            <Accounts accounts={accounts} closeModal={closeModal} />
-          ) : (
-            <NoExtension />
-          )}
-        </Modal>
+        <AccountsModal accounts={accounts} closeModal={closeModal} />
       )}
     </>
   );

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { LOCAL_STORAGE } from 'consts';
 import { useAccount } from 'hooks';
 import { toShortAddress } from 'utils';
-import { isLoggedIn } from '../../../../utils';
+import { isLoggedIn } from '../../../../../../utils';
 import './Account.scss';
 
 type Props = {

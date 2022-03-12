@@ -1,5 +1,4 @@
-import { Accounts } from './Accounts/Accounts';
-import { NoExtension } from './NoExtension/NoExtension';
-import { Summary } from './Summary/Summary';
+import { Account } from './Account/Account';
+import { AccountsModal } from './AccountsModal/AccountsModal';
 
-export { Accounts, NoExtension, Summary };
+export { Account, AccountsModal };
