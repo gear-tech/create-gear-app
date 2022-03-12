@@ -1,18 +1,13 @@
 import { useEffect, useState } from 'react';
-import Identicon from '@polkadot/react-identicon';
-import { ReactComponent as Logout } from 'images/logout.svg';
 import { Modal } from 'components/Modal/Modal';
-import { LOCAL_STORAGE } from 'consts';
 import { useAccount } from 'hooks';
-import { useAccounts, useBalance } from './hooks';
+import { useAccounts } from './hooks';
 import { isLoggedIn } from './utils';
-import { Accounts, NoExtension } from './children';
-import './Wallet.scss';
+import { Accounts, NoExtension, Summary } from './children';
 
 const Wallet = () => {
-  const { account, setAccount } = useAccount();
+  const { setAccount } = useAccount();
   const accounts = useAccounts();
-  const balance = useBalance();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -27,44 +22,9 @@ const Wallet = () => {
     setIsModalOpen(false);
   };
 
-  const handleLogout = () => {
-    setAccount(undefined);
-    localStorage.removeItem(LOCAL_STORAGE.ACCOUNT);
-  };
-
   return (
     <>
-      <div className="user-wallet__wrapper">
-        {account ? (
-          <>
-            <div className="user-wallet__balance">{balance}</div>
-            <button
-              type="button"
-              className="user-wallet__user-info"
-              onClick={openModal}
-            >
-              <Identicon value={account.address} size={25} theme="polkadot" />
-              <span className="user-wallet__name">{account.meta.name}</span>
-            </button>
-            <button
-              type="button"
-              className="user-wallet__logout"
-              aria-label="menuLink"
-              onClick={handleLogout}
-            >
-              <Logout />
-            </button>
-          </>
-        ) : (
-          <button
-            className="user-wallet__connect-button"
-            type="button"
-            onClick={openModal}
-          >
-            Connect
-          </button>
-        )}
-      </div>
+      <Summary openModal={openModal} closeModal={closeModal} />
       {isModalOpen && (
         <Modal caption="Connect" close={closeModal}>
           {accounts ? (
