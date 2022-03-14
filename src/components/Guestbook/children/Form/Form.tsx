@@ -1,55 +1,83 @@
-import React, { useState } from 'react';
-
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { CONTRACT_ADDRESS, REGISTRY_TYPES } from 'consts';
+import { useAccount, useApi } from 'hooks';
+import { useAlert } from 'react-alert';
+import { sendMessageToProgram } from 'service/SendMessage';
 import './Form.scss';
 
-export const Form = ({ handleSubmit }: any) => {
+type Props = {
+  updateMessages: () => void;
+};
 
-  const [messageContext, setMessageContext] = useState<string>('');
-  const [valueContext, setValueContext] = useState<number>(0);
+const Form = ({ updateMessages }: Props) => {
+  const { api } = useApi();
+  const { account } = useAccount();
+  const alert = useAlert();
+
+  const [message, setMessage] = useState('');
+  const [value, setValue] = useState(0);
+
+  const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
+
+  const handleMinusClick = () => {
+    if (value > 0) {
+      setValue((prevValue) => prevValue - 1);
+    }
+  };
+
+  const handlePlusClick = () => {
+    setValue((prevValue) => prevValue + 1);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    // example of sending a message to the program
+    e.preventDefault();
+
+    if (account) {
+      sendMessageToProgram(
+        api,
+        CONTRACT_ADDRESS,
+        300_000_000,
+        { AddMessage: message },
+        { handle_input: 'Action', types: REGISTRY_TYPES },
+        account,
+        alert,
+        updateMessages
+      );
+    } else {
+      alert.error('Wallet not connected');
+    }
+  };
 
   return (
-    <form className="message-form">
+    <form className="message-form" onSubmit={handleSubmit}>
       <input
-        id="message"
         type="text"
         placeholder="Type your message:"
-        value={messageContext}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          setMessageContext(event.target.value)
-        }
-        autoComplete="off"
+        value={message}
+        onChange={handleMessageChange}
         required
       />
       <footer>
         <div className="counter">
           <div className="title">Value:</div>
-          <span
-            className="minus"
-            onClick={() => {
-              if (valueContext > 0) {
-                setValueContext(valueContext - 1);
-              }
-            }}
-          ></span>
+          <span className="minus" onClick={handleMinusClick} />
           <input
             type="number"
-            min="0"
-            step="0.1"
             className="message-form__value"
-            id="value"
+            value={value}
             readOnly
-            value={valueContext}
-            onChange={(e: any) => setValueContext(e.target.value)}
           />
-          <span
-            className="plus"
-            onClick={() => setValueContext(valueContext + 1)}
-          ></span>
+          <span className="plus" onClick={handlePlusClick} />
         </div>
-        <button className="message-form__button success" onClick={(event) => {handleSubmit(event, messageContext)}}>
+        <button type="submit" className="message-form__button success">
           Add message
         </button>
       </footer>
     </form>
   );
 };
+
+export { Form };

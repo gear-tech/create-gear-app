@@ -13,11 +13,6 @@ export const sendMessageToProgram = async (
   alert: any,
   callback?: () => void
 ) => {
-  if (account == null) {
-    alert.error(`Wallet not connected`);
-    return;
-  }
-
   const injector: InjectedExtension = await web3FromSource(account.meta.source);
 
   try {
