@@ -1,12 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Welcome } from './Welcome/Welcome';
-import { Form } from './Form/Form';
 import { useAlert } from 'react-alert';
 import { useApi, useAccount } from 'hooks';
 import { CONTRACT_ADDRESS, REGISTRY_TYPES } from 'consts';
 import { sendMessageToProgram } from '../../service/SendMessage';
-import { MessageList } from './MessageList/MessageList';
 import { Message } from '../../types/message';
+import { Welcome, Form, Messages } from './children';
 
 export const Guestbook = () => {
   const alert = useAlert();
@@ -51,7 +49,7 @@ export const Guestbook = () => {
     <>
       <Welcome />
       <Form handleSubmit={handleSubmit} />
-      <MessageList messages={messages} />
+      <Messages messages={messages} />
     </>
   );
 };
