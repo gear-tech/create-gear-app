@@ -6,10 +6,10 @@ import { sendMessageToProgram } from 'service/SendMessage';
 import './Form.scss';
 
 type Props = {
-  updateMessages: () => void;
+  fetchMessages: () => void;
 };
 
-const Form = ({ updateMessages }: Props) => {
+const Form = ({ fetchMessages }: Props) => {
   const { api } = useApi();
   const { account } = useAccount();
   const alert = useAlert();
@@ -44,7 +44,7 @@ const Form = ({ updateMessages }: Props) => {
         { handle_input: 'Action', types: REGISTRY_TYPES },
         account,
         alert,
-        updateMessages
+        fetchMessages
       );
     } else {
       alert.error('Wallet not connected');
