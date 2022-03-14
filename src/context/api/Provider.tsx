@@ -1,11 +1,8 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GearApi } from '@gear-js/api';
 import { nodeApi } from 'api/initApi';
+import { Props } from '../types';
 import { ApiContext } from './Context';
-
-type Props = {
-  children: ReactNode;
-};
 
 const { Provider } = ApiContext;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApi } from 'hooks/useApi';
+import { useApi } from 'hooks';
 import { ReactComponent as Logo } from './images/logo.svg';
 import { Loader } from './components/Loader/Loader';
 import { Wallet } from './components/Wallet/Wallet';
