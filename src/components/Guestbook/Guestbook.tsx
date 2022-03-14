@@ -3,7 +3,7 @@ import { useAlert } from 'react-alert';
 import { useApi, useAccount } from 'hooks';
 import { CONTRACT_ADDRESS, REGISTRY_TYPES } from 'consts';
 import { sendMessageToProgram } from '../../service/SendMessage';
-import { Message } from '../../types/message';
+import { Message } from './types';
 import { Welcome, Form, Messages } from './children';
 
 export const Guestbook = () => {

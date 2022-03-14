@@ -1,7 +1,7 @@
 import React from 'react';
 import Identicon from '@polkadot/react-identicon';
 import { toShortAddress } from 'utils';
-import { Message } from 'types/message';
+import { Message } from '../../types';
 import './Messages.scss';
 
 type Props = {
