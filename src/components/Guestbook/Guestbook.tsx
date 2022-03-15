@@ -1,57 +1,33 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Welcome } from './Welcome/Welcome';
-import { Form } from './Form/Form';
-import { useAlert } from 'react-alert';
-import { useApi, useAccount } from 'hooks';
-import { CONTRACT_ADDRESS, REGISTRY_TYPES } from 'consts';
-import { sendMessageToProgram } from '../../service/SendMessage';
-import { MessageList } from './MessageList/MessageList';
-import { Message } from '../../types/message';
+import React, { useEffect, useState } from 'react';
+import { useApi } from 'hooks';
+import { CONTRACT_ADDRESS } from 'consts';
+import { Message } from './types';
+import { Welcome, Form, Messages } from './children';
+import guestbookMeta from 'out/guestbook.meta.wasm';
 
-export const Guestbook = () => {
-  const alert = useAlert();
+const Guestbook = () => {
   const { api } = useApi();
-  const { account } = useAccount();
+  const [messages, setMessages] = useState<Message[]>([]);
 
-  const [messages, setMessages] = useState<Array<Message>>([]);
-  const [refreshPage, setRefreshPage] = useState(false);
-
-  const readState = useCallback(async () => {
-    // @ts-ignore
-    // TODO: add type
-    const buffer = await import('../../out/guestbook.meta.wasm');
-    const state = await api.programState.read(CONTRACT_ADDRESS, buffer.default);
-    console.log(state.toHuman());
-    setMessages(state.toHuman() as Message[]);
-  }, [api.programState]);
-
-  useEffect(() => {
-    readState();
-  }, [readState, refreshPage]);
-
-  const handleSubmit = (event: React.MouseEvent<HTMLElement>, text: string) => {
-    // Example of sending a message to the program
-    event.preventDefault();
-
-    sendMessageToProgram(
-      api,
-      CONTRACT_ADDRESS,
-      300_000_000,
-      { AddMessage: text },
-      { handle_input: 'Action', types: REGISTRY_TYPES },
-      account!,
-      alert,
-      () => {
-        setRefreshPage(!refreshPage);
-      }
-    );
+  const fetchMessages = () => {
+    fetch(guestbookMeta)
+      .then((res) => res.arrayBuffer())
+      .then((arrayBuffer) => Buffer.from(arrayBuffer))
+      .then((buffer) => api.programState.read(CONTRACT_ADDRESS, buffer))
+      .then((state) => state.toHuman() as Message[])
+      .then(setMessages);
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(fetchMessages, []);
 
   return (
     <>
       <Welcome />
-      <Form handleSubmit={handleSubmit} />
-      <MessageList messages={messages} />
+      <Form fetchMessages={fetchMessages} />
+      <Messages messages={messages} />
     </>
   );
 };
+
+export { Guestbook };

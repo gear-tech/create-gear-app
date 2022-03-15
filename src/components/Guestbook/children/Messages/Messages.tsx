@@ -1,15 +1,14 @@
 import React from 'react';
 import Identicon from '@polkadot/react-identicon';
-import { toShortAddress } from '../../../utils';
-import { Message } from '../../../types/message';
-
-import './MessageList.scss';
+import { toShortAddress } from 'utils';
+import { Message } from '../../types';
+import './Messages.scss';
 
 type Props = {
   messages: Message[];
 };
 
-export const MessageList = ({ messages }: Props) => {
+const Messages = ({ messages }: Props) => {
   const messagesItem = messages.map((item: Message, index: number) => (
     <div className="messages-list__message" key={index}>
       <div className="messages-list__user-info">
@@ -28,3 +27,5 @@ export const MessageList = ({ messages }: Props) => {
 
   return <div className="messages-list">{messagesItem.reverse()}</div>;
 };
+
+export { Messages };

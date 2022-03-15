@@ -1,36 +1,26 @@
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 module.exports = {
   webpack: {
     configure: (webpackConfig, { env, paths }) => {
       webpackConfig.resolve.alias = {
         ...webpackConfig.resolve.alias,
-        "react/jsx-dev-runtime": "react/jsx-dev-runtime.js",
-        "react/jsx-runtime": "react/jsx-runtime.js",
+        'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
+        'react/jsx-runtime': 'react/jsx-runtime.js',
       };
 
       webpackConfig.resolve.fallback = {
         ...webpackConfig.resolve.fallback,
-        buffer: require.resolve("buffer/"),
-        crypto: require.resolve("crypto-browserify"),
-        stream: require.resolve("stream-browserify"),
+        buffer: require.resolve('buffer/'),
+        crypto: require.resolve('crypto-browserify'),
+        stream: require.resolve('stream-browserify'),
       };
 
       webpackConfig.plugins.push(
         new webpack.ProvidePlugin({
-          Buffer: ["buffer", "Buffer"],
+          Buffer: ['buffer', 'Buffer'],
         })
       );
-
-      // webpackConfig.experiments = {
-      //   asyncWebAssembly: true,
-      // };
-
-      webpackConfig.module.rules.push({
-        test: /\.wasm$/,
-        type: "javascript/auto",
-        use: ["arraybuffer-loader"],
-      });
 
       return webpackConfig;
     },
