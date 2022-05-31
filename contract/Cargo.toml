@@ -12,9 +12,9 @@ crate-type = ["cdylib"]
 
 [dependencies]
 gstd = { git = "https://github.com/gear-tech/gear", features = ["debug"] }
-scale-info = { version = "1.0.0", default-features = false, features = ["derive"] }
-codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
-primitive-types = { version = "0.10.1", default-features = false, features = ["scale-info"]}
+scale-info = { version = "2.1.2", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.1.2", default-features = false, features = ["derive"] }
+primitive-types = { version = "0.11.1", default-features = false, features = ["scale-info"]}
 
 
 [profile.release]
