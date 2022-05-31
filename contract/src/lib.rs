@@ -2,11 +2,7 @@
 
 // 1️⃣ External packages (crates) and internal modules import
 use codec::{Decode, Encode};
-use gstd::{
-    debug, exec, msg,
-    prelude::*,
-    ActorId,
-};
+use gstd::{debug, exec, msg, prelude::*, ActorId};
 use scale_info::TypeInfo;
 
 // 2️⃣ This defines the meta information about the contract
@@ -69,7 +65,7 @@ pub unsafe extern "C" fn handle() {
 
             STATE.add_message(message.clone());
 
-            msg::reply((), 0);
+            msg::reply(message.clone(), 0).unwrap();
 
             debug!("Added new post: {:?}", message);
         }
@@ -80,6 +76,6 @@ pub unsafe extern "C" fn handle() {
 pub unsafe extern "C" fn meta_state() -> *mut [i32; 2] {
     let messages: Vec<Message> = STATE.messages.clone();
     let encoded = messages.encode();
-    
+
     gstd::util::to_leak_ptr(encoded)
 }
